@@ -1,0 +1,9 @@
+Thiết lập thư mục
+
+/src :
+    ----Component: Thư mục chứa các thành phần của ứng dụng (Button,Form,header ...)
+    ----Pages: Thư mục này chứa các trang (pages) của ứng dụng của bạn. Các trang có thể là trang chủ, trang giỏ hàng, trang thanh toán, trang chi tiết sản phẩm, và các trang khác.
+    ----Assets: Thư mục này chứa các tài nguyên (assets) của ứng dụng của bạn như hình ảnh, video, font, biểu tượng.
+    ----Utils: Thư mục này chứa các tiện ích (utils) của ứng dụng của bạn như các hàm chuyển đổi, các hàm tính toán, các hàm định dạng.
+    ----Routers: Thư mục chứa các thông tin về định tuyến tới các trang khác
+/public : Thư mục chứa các tệp tĩnh
