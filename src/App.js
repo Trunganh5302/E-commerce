@@ -1,12 +1,12 @@
 
 import './App.css';
-import BasicExample from './Component/Header/Header';
+import HomePage from './Pages/Home/Home';
 
 
 function App() {
   return (
     <div>
-        <BasicExample />
+        <HomePage />
         Trung Anh
     </div>
   );
