@@ -1,0 +1,13 @@
+
+.wrapper{
+    padding: 0;
+}
+
+.text-2xl{
+    margin-top: 50px;
+}
+.wrapper-btn{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+}
