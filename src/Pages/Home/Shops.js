@@ -1,7 +1,13 @@
+import ShopCategory from "../../Component/SideBar/ShopCategory"
+import Example from "../../Component/Header/Header"
+import Footer from "../../Component/Footer/Footer"
+
 export default function Shop() {
     return (
         <>
-            <h1>Trang shop</h1>
+            <Example />
+            <ShopCategory/>
+            <Footer />
         </>
     )
 }
