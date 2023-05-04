@@ -1,0 +1,8 @@
+const path = require('path');
+
+module.exports = {
+    'config': path.resolve('./','config.json'),  // file nói cho file này biết là làm sao để kết nối được với database
+    'migrations-path': path.resolve('./src','migrations'), // tạo bảng trong database
+    'models-path': path.resolve('./src', 'modules'),
+    'seeders-path': path.resolve('./src', 'seeders')   // tạo dữ liệu fake 
+}
