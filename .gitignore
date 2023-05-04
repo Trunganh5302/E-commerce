@@ -1,0 +1,7 @@
+/node_module
+/vendor
+/.idea
+.idea/
+.env
+
+# // những thứ không đưa lên git
