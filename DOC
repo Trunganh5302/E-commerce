@@ -1,0 +1,17 @@
+Tập tin 
+
+ --  .env.example: thường được đính kèm với mã nguồn 
+        của ứng dụng và chứa các giá trị giả định hoặc mẫu cho các biến môi trường mà ứng dụng cần sử dụng. 
+        Trong này có PORT mà để server có thể kết nối
+
+ --  .env : Chứa các biến môi trường được sử dụng để kết nối ứng dụng
+ --  .server.js : ứng dụng backend được viết bằng framework ExpressJS của Node.js. 
+                    Ứng dụng này sử dụng body-parser để lấy các tham số được gửi từ client và
+                    sử dụng một view engine để render các template trang web.
+                -- trong đó tập tin .env được gọi tới bởi hàm " require('dotenv').config(); "
+                    express: là module để tạo ra ứng dụng web bằng ExpressJS.
+                    body-parser: là module giúp xử lý dữ liệu được gửi từ client về server, bao gồm cả dữ liệu của phương thức POST và các tham số truyền vào trên URL.
+                    viewEngine: là module để cấu hình view engine cho ứng dụng. View engine là một công cụ giúp hiển thị các trang web có nội dung động, như EJS, Handlebars, Pug (trước đây là Jade), ...
+                    initWebRoutes: là một module chứa các route (đường dẫn) của ứng dụng. Module này sẽ định nghĩa các đường dẫn mà người dùng có thể truy cập để thực hiện các thao tác như đăng nhập, đăng ký, hiển thị trang chủ, hiển thị chi tiết sản phẩm, v.v.
+                    connectDB: là một module để kết nối với cơ sở dữ liệu. Module này sẽ sử dụng các thông tin được lưu trữ trong file connectDB.js để kết nối với cơ sở dữ liệu mySql
+ -- Folder models: Chứa các file truyền dữ liệu database
