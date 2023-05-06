@@ -13,16 +13,15 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Allcode.init({
-    firstName: DataTypes.STRING,
-    lastName: DataTypes.STRING,
-    imageSrc: DataTypes.STRING,
-    imageAlt: DataTypes.STRING,
-    price: DataTypes.STRING,
-    color: DataTypes.STRING
+  OrderDetail.init({
+    Product_id: DataTypes.INTEGER,
+    Qty: DataTypes.INTEGER,
+    price: DataTypes.INTEGER,
+    Order_id: DataTypes.INTEGER,
+    SubTotal: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'Allcode',
+    modelName: 'OrderDetail',
   });
-  return Allcode;
+  return OrderDetail;
 };
