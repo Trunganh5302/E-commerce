@@ -20,6 +20,7 @@ initWebRoutes(app)
 connectDB();
 
 let port = process.env.PORT || 6969; // lấy port đã tạo trước đó
+console.log("hello")
 // nếu port = undefined thì => port = 6969
 
 

@@ -2,8 +2,6 @@
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-
-
   async up (queryInterface, Sequelize) {
     /**
      * Add seed commands here.
@@ -14,11 +12,12 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-   return queryInterface.bulkInsert('product',[{  // dọc từng file và bulkInsert có thể chèn 1 lúc nhiều giá trị
-    firstName: 'John',
-    lastName:'TrungAnh',
-    price: '$35',
-    color: 'black',
+   return queryInterface.bulkInsert('products',[{
+    name: 'John',
+    imageSrc:'TrungAnh',
+    imageAlt:'trunganhno01@gmail.com',
+    price:'$54',
+    color:'black',
     createdAt: new Date(),
     updatedAt: new Date()
    }]);

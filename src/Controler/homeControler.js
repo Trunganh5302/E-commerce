@@ -4,7 +4,7 @@ import db from '/CODE/Linh tinh/Example/BackendEcommerce/models/index'
 let getHomePage = async (req,res) =>{
 
     try {
-        let data = await db.User.findAll(); // tham chiếu đến database gọi tất cả dữ liệu có trong đó
+        let data = await db.Product.findAll(); // tham chiếu đến database gọi tất cả dữ liệu có trong đó
         console.log('===========')
         console.log(data)
         return res.render('Homepage.ejs', {
