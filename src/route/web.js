@@ -8,7 +8,7 @@ let initWebRoutes = (app) =>{
 
     router.get('/',  homeControler.getHomePage)
     router.get('/about',  homeControler.getAboutPage)
-    // router.get('/crud',  homeControler.getData)
+    router.get('/crud',  homeControler.getData)
 
     router.get('/', (req,res)=>{
         return res.send("Hello trung anh");
