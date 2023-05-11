@@ -26,8 +26,14 @@ let getData = (req,res) => {
     return res.render('test/crud.ejs')
 }
 
+let postCRUD = (req, res) =>{
+    console.log(req.body)
+    return res.send("trung anh đã post")
+}
+
 module.exports = {
     getHomePage: getHomePage,
     getAboutPage: getAboutPage,
-    getData: getData
+    getData: getData,
+    postCRUD: postCRUD
 }
