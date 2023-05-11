@@ -4,7 +4,7 @@ import viewEngine from "./Config/viewEngine"
 import initWebRoutes from './route/web'
 import connectDB from '../config/connectDB'
 
-
+    
 require('dotenv').config(); // gọi tới hàm 
 
 let app = express();

@@ -1,5 +1,7 @@
 import { json } from 'body-parser';
 import db from '/CODE/Linh tinh/Example/BackendEcommerce/models/index'
+import CRUDProduct from '../Service/CRUDProduct';
+
 
 let getHomePage = async (req,res) =>{
 
@@ -26,8 +28,10 @@ let getData = (req,res) => {
     return res.render('test/crud.ejs')
 }
 
-let postCRUD = (req, res) =>{
-    console.log(req.body)
+let postCRUD = async (req, res) =>{
+
+    let message = await CRUDProduct.createNewProduct(req.body)
+    console.log(message)
     return res.send("trung anh đã post")
 }
 
