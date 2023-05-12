@@ -68,8 +68,17 @@ let putCRUD = async (req, res) => {
     })
 }
 
-
-
+let deleteCRUD = async (req,res) =>{
+    let ProductID =  req.query.id;
+    if (ProductID) {
+        await CRUDProduct.deleteProductbyId(ProductID)
+        return res.send("Delete thành công")
+    }else{
+        return res.send("Không tìm thấy Product")
+    }
+    
+    
+}
 
 module.exports = {
     getHomePage: getHomePage,
@@ -78,5 +87,6 @@ module.exports = {
     postCRUD: postCRUD,
     getCRUD: getCRUD,
     getEditCRUD:getEditCRUD,
-    putCRUD: putCRUD
+    putCRUD: putCRUD,
+    deleteCRUD: deleteCRUD
 }

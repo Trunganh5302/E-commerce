@@ -81,9 +81,27 @@ let updateProduct = (data) =>{
     })
 }
 
+let deleteProductbyId = (Productid) => {
+    return new Promise(async(resolve, reject) => {
+        try {
+            let product = await db.Product.findOne({
+                where: {id: Productid}
+            })
+
+            if (product) {
+                await product.destroy()
+            }
+            resolve(); // return
+        } catch (error) {
+            reject(e)
+        }
+    })
+}
+
 module.exports = {
     createNewProduct:  createNewProduct,
     getAllProduct: getAllProduct,
     getProductbyID:getProductbyID,
-    updateProduct: updateProduct 
+    updateProduct: updateProduct,
+    deleteProductbyId: deleteProductbyId
 }
