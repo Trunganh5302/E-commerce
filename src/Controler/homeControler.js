@@ -35,9 +35,39 @@ let postCRUD = async (req, res) =>{
     return res.send("trung anh đã post")
 }
 
+let getCRUD = async (req, res) => {
+    let data = await CRUDProduct.getAllProduct()
+    console.log("----------------")
+    console.log(data)
+    console.log("----------------")
+
+    return res.render('test/DisplayCRUD.ejs', {
+        dataTable: data 
+    })
+}
+
+let getEditCRUD = async (req, res) => {
+    let ProductID =  req.query.id;
+    console.log(ProductID)
+    if(ProductID){
+        let ProductData = CRUDProduct.getProductbyID(ProductID);
+        res.send("Đã tìm thấy")
+    }else{
+        return res.send('From edit page')
+    }
+
+
+}
+
+
+
+
+
 module.exports = {
     getHomePage: getHomePage,
     getAboutPage: getAboutPage,
     getData: getData,
-    postCRUD: postCRUD
+    postCRUD: postCRUD,
+    getCRUD: getCRUD,
+    getEditCRUD:getEditCRUD
 }

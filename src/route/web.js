@@ -10,9 +10,10 @@ let initWebRoutes = (app) =>{
     router.get('/about',  homeControler.getAboutPage)
     router.get('/crud',  homeControler.getData)
 
-
-
+    // xử lí bên data
     router.post('/post-crud',  homeControler.postCRUD)
+    router.get('/get-crud',  homeControler.getCRUD)
+    router.get('/edit-crud',  homeControler.getEditCRUD)
 
     router.get('/', (req,res)=>{
         return res.send("Hello trung anh");

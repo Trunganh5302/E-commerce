@@ -21,6 +21,26 @@ let createNewProduct = (data) => {
 
 }
 
+let getAllProduct = () => {
+    return new Promise(async(resolve, reject) => {
+        try{
+            let product = db.Product.findAll({
+                raw: true
+            });
+            resolve(product); // thoát khỏi 1 promise
+        }catch(e){
+            reject(e)
+        }
+    })
+}
+
+let getProductbyID = (id) => {
+    
+}
+
+
 module.exports = {
-    createNewProduct:  createNewProduct
+    createNewProduct:  createNewProduct,
+    getAllProduct: getAllProduct,
+    getProductbyID:getProductbyID
 }
