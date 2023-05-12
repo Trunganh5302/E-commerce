@@ -48,10 +48,11 @@ let getCRUD = async (req, res) => {
 
 let getEditCRUD = async (req, res) => {
     let ProductID =  req.query.id;
-    console.log(ProductID)
     if(ProductID){
-        let ProductData = CRUDProduct.getProductbyID(ProductID);
-        res.send("Đã tìm thấy")
+        let ProductData = await CRUDProduct.getProductbyID(ProductID);
+        return res.render('test/editCRUD.ejs',{
+            product: ProductData // gán dữ liệu của ProoductData vào trong biến product để truyền ra view
+        })
     }else{
         return res.send('From edit page')
     }
@@ -59,6 +60,13 @@ let getEditCRUD = async (req, res) => {
 
 }
 
+let putCRUD = async (req, res) => {
+    let data = req.body // lấy tất cả input 
+    let allProduct = await CRUDProduct.updateProduct(data)
+    return res.render('test/DisplayCRUD.ejs', {
+        dataTable: allProduct 
+    })
+}
 
 
 
@@ -69,5 +77,6 @@ module.exports = {
     getData: getData,
     postCRUD: postCRUD,
     getCRUD: getCRUD,
-    getEditCRUD:getEditCRUD
+    getEditCRUD:getEditCRUD,
+    putCRUD: putCRUD
 }

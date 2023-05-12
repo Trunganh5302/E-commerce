@@ -34,13 +34,56 @@ let getAllProduct = () => {
     })
 }
 
-let getProductbyID = (id) => {
-    
+let getProductbyID = (ProductId) => {
+    return new Promise(async(resolve, reject) => {
+        try {
+            let product = await db.Product.findOne({
+                where: {id: ProductId},
+                raw: true
+            })
+
+            if (product) {
+                resolve(product)
+            }else{
+                resolve({})
+            }
+        } catch (e) {
+            reject(e)
+        }
+    })
 }
 
+let updateProduct = (data) =>{
+    return new  Promise(async(resolve, reject) => {
+        try {
+            let product = await db.Product.findOne({
+                where: {id: data.id} // tìm Product trong db với điều kiệm id truyền vào
+            })
+            if (product) {
+                product.name = data.name
+                product.imageSrc = data.imageSrc
+                product.imageAlt = data.imageAlt
+                product.price = data.price
+                product.color = data.color
+
+                console.log(data.id)
+
+                await product.save()
+
+                let allProduct = await db.Product.findAll()
+                resolve(allProduct)
+            }else{
+                resolve()
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    })
+}
 
 module.exports = {
     createNewProduct:  createNewProduct,
     getAllProduct: getAllProduct,
-    getProductbyID:getProductbyID
+    getProductbyID:getProductbyID,
+    updateProduct: updateProduct 
 }

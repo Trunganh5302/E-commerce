@@ -14,6 +14,7 @@ let initWebRoutes = (app) =>{
     router.post('/post-crud',  homeControler.postCRUD)
     router.get('/get-crud',  homeControler.getCRUD)
     router.get('/edit-crud',  homeControler.getEditCRUD)
+    router.post('/put-crud',  homeControler.putCRUD)
 
     router.get('/', (req,res)=>{
         return res.send("Hello trung anh");
