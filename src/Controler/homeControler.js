@@ -80,6 +80,14 @@ let deleteCRUD = async (req,res) =>{
     
 }
 
+let getProduct = async (req,res) => {
+    let data = await CRUDProduct.getAllProduct()
+
+    return res.render('Homepage.ejs', {
+        dataTable: data 
+    })
+}
+
 module.exports = {
     getHomePage: getHomePage,
     getAboutPage: getAboutPage,
@@ -88,5 +96,6 @@ module.exports = {
     getCRUD: getCRUD,
     getEditCRUD:getEditCRUD,
     putCRUD: putCRUD,
-    deleteCRUD: deleteCRUD
+    deleteCRUD: deleteCRUD,
+    getProduct:getProduct
 }

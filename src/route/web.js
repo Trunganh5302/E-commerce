@@ -2,11 +2,12 @@
 
 import express from "express";
 import homeControler from "../Controler/homeControler";
+import userControler from "../Controler/userControler";
 
 let router = express.Router();
 let initWebRoutes = (app) =>{
 
-    router.get('/',  homeControler.getHomePage)
+    router.get('/',  homeControler.getProduct)
     router.get('/about',  homeControler.getAboutPage)
     router.get('/crud',  homeControler.getData)
 
@@ -16,6 +17,11 @@ let initWebRoutes = (app) =>{
     router.get('/edit-crud',  homeControler.getEditCRUD)
     router.post('/put-crud',  homeControler.putCRUD)
     router.get('/delete-crud',  homeControler.deleteCRUD) 
+
+
+    // api
+    router.post('/api/login',  userControler.handelLogin) 
+
 
     router.get('/', (req,res)=>{
         return res.send("Hello trung anh");
