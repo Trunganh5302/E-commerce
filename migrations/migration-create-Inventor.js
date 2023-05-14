@@ -2,24 +2,26 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Order_Detail_tbl', {
-        // Customer_id: DataTypes.INTEGER,
-        // Shipping_date: DataTypes.INTEGER,
-        // is_delivered: DataTypes.INTEGER
-      Order_Detail_Tbl_id: {
+    await queryInterface.createTable('inventor', {
+        // Product_id: DataTypes.INTEGER,
+        // Qty: DataTypes.INTEGER,
+        // price: DataTypes.INTEGER,
+        // Order_id: DataTypes.INTEGER,
+        // SubTotal: DataTypes.INTEGER
+      id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      Customer_id: {
+      Quantity: {
         type: Sequelize.INTEGER
       },
-      Shipping_date: {
-        type: Sequelize.DATE
+      categoryID: {
+        type: Sequelize.INTEGER
       },
-      is_delivered: {
-        type: Sequelize.BOOLEAN
+      productID: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
@@ -32,6 +34,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Order_Detail_tbl');
+    await queryInterface.dropTable('inventor');
   }
 };
