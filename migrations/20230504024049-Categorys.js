@@ -12,6 +12,9 @@ module.exports = {
       nameCategory: {
         type: Sequelize.STRING
       },
+      imageSrc:{
+        type: Sequelize.STRING
+      },
       Desc: {
         type: Sequelize.STRING
       },

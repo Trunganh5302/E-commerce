@@ -7,7 +7,9 @@ import userControler from "../Controler/userControler";
 let router = express.Router();
 let initWebRoutes = (app) =>{
 
-    router.get('/',  homeControler.getProduct)
+    router.get('/',  homeControler.getCategory)
+    // router.get('/',  homeControler.getProduct)
+
     router.get('/about',  homeControler.getAboutPage)
     router.get('/crud',  homeControler.getData)
 

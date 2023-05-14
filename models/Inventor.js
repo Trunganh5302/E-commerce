@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  OrderDetail.init({
+  Inventor.init({
     Quantity: DataTypes.INTEGER,
     categoryID: DataTypes.INTEGER,
     productID: DataTypes.INTEGER

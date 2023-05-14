@@ -24,7 +24,7 @@ let createNewProduct = (data) => {
 let getAllProduct = () => {
     return new Promise(async(resolve, reject) => {
         try{
-            let product = db.Product.findAll({
+            let product = db.Products.findAll({
                 raw: true
             });
             resolve(product); // thoát khỏi 1 promise
@@ -98,10 +98,11 @@ let deleteProductbyId = (Productid) => {
     })
 }
 
+
 module.exports = {
     createNewProduct:  createNewProduct,
     getAllProduct: getAllProduct,
     getProductbyID:getProductbyID,
     updateProduct: updateProduct,
-    deleteProductbyId: deleteProductbyId
+    deleteProductbyId: deleteProductbyId,
 }

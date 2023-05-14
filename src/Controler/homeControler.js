@@ -1,6 +1,7 @@
 import { json } from 'body-parser';
 import db from '/CODE/Linh tinh/Example/BackendEcommerce/models/index'
 import CRUDProduct from '../Service/CRUDProduct';
+import CRUDCategory from '../Service/CRUDCategory'
 
 
 let getHomePage = async (req,res) =>{
@@ -84,7 +85,17 @@ let getProduct = async (req,res) => {
     let data = await CRUDProduct.getAllProduct()
 
     return res.render('Homepage.ejs', {
-        dataTable: data 
+        dataTable: data
+    })
+}
+
+
+let getCategory = async (req,res) => {
+    let dataCategory = await CRUDCategory.getAllCategory()
+    let data = await CRUDProduct.getAllProduct()
+    return res.render('Homepage.ejs', {
+        dataCate: dataCategory,
+        dataTable: data
     })
 }
 
@@ -97,5 +108,6 @@ module.exports = {
     getEditCRUD:getEditCRUD,
     putCRUD: putCRUD,
     deleteCRUD: deleteCRUD,
-    getProduct:getProduct
+    getProduct:getProduct,
+    getCategory:getCategory
 }
