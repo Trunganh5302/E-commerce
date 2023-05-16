@@ -8,9 +8,15 @@ let router = express.Router();
 let initWebRoutes = (app) =>{
 
     router.get('/',  homeControler.getCategory)
-    // router.get('/',  homeControler.getProduct)
+    router.get('/shops',  homeControler.getShop) // chưa làm
+    router.get('/about',  homeControler.getAboutPage) // chưa làm
+    router.get('/news',  homeControler.getAboutPage)  // chưa làm
+    router.get('/contacts',  homeControler.getAboutPage)  // chưa làm
 
-    router.get('/about',  homeControler.getAboutPage)
+    router.get('/detail-product',  homeControler.getDetailProduct)
+
+
+
     router.get('/crud',  homeControler.getData)
 
     // xử lí bên data

@@ -37,7 +37,7 @@ let getAllProduct = () => {
 let getProductbyID = (ProductId) => {
     return new Promise(async(resolve, reject) => {
         try {
-            let product = await db.Product.findOne({
+            let product = await db.Products.findOne({
                 where: {id: ProductId},
                 raw: true
             })
@@ -56,7 +56,7 @@ let getProductbyID = (ProductId) => {
 let updateProduct = (data) =>{
     return new  Promise(async(resolve, reject) => {
         try {
-            let product = await db.Product.findOne({
+            let product = await db.Products.findOne({
                 where: {id: data.id} // tìm Product trong db với điều kiệm id truyền vào
             })
             if (product) {

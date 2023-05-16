@@ -22,7 +22,16 @@ let getHomePage = async (req,res) =>{
 }
 
 let getAboutPage = (req, res) => {
-    return res.render('test/about.ejs')
+    return res.render('about.ejs')
+}
+
+let getShop = async (req, res) => {
+    let dataCategory = await CRUDCategory.getAllCategory()
+    let data = await CRUDProduct.getAllProduct()
+    return res.render('shop.ejs', {
+        dataCate: dataCategory,
+        dataTable: data
+    })
 }
 
 let getData = (req,res) => {
@@ -57,8 +66,18 @@ let getEditCRUD = async (req, res) => {
     }else{
         return res.send('From edit page')
     }
+}
 
-
+let getDetailProduct = async (req,res) => {
+    let ProductID =  req.query.id;
+    if(ProductID){
+        let ProductData = await CRUDProduct.getProductbyID(ProductID);
+        return res.render('detailProduct.ejs',{
+            product: ProductData // gán dữ liệu của ProoductData vào trong biến product để truyền ra view
+        })
+    }else{
+        return res.send('From edit page')
+    }
 }
 
 let putCRUD = async (req, res) => {
@@ -99,6 +118,8 @@ let getCategory = async (req,res) => {
     })
 }
 
+
+
 module.exports = {
     getHomePage: getHomePage,
     getAboutPage: getAboutPage,
@@ -109,5 +130,7 @@ module.exports = {
     putCRUD: putCRUD,
     deleteCRUD: deleteCRUD,
     getProduct:getProduct,
-    getCategory:getCategory
+    getCategory:getCategory,
+    getShop:getShop,
+    getDetailProduct:getDetailProduct
 }

@@ -19,6 +19,223 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200&display=swap');
+
+    html,
+    body {
+        height: 100%
+    }
+
+    body {
+        display: grid;
+        background: #fff;
+        font-family: 'Manrope', sans-serif
+    }
+
+    .mydiv {
+        margin-top: 50px;
+        margin-bottom: 50px
+    }
+
+    .cross {
+        font-size: 10px
+    }
+
+    .padding-0 {
+        padding-right: 5px;
+        padding-left: 5px
+    }
+
+    .img-style {
+        margin-left: -11px;
+        box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        max-width: 104% !important
+    }
+
+    .m-t-20 {
+        margin-top: 20px
+    }
+
+    .bbb_background {
+        background-color: #E0E0E0 !important
+    }
+
+    .ribbon {
+        width: 150px;
+        height: 150px;
+        overflow: hidden;
+        position: absolute
+    }
+
+    .ribbon span {
+        position: absolute;
+        display: block;
+        width: 34px;
+        border-radius: 50%;
+        padding: 8px 0;
+        background-color: #3498db;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
+        color: #fff;
+        font: 100 18px/1 'Lato', sans-serif;
+        text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+        text-transform: uppercase;
+        text-align: center
+    }
+
+    .ribbon-top-right {
+        top: -10px;
+        right: -10px
+    }
+
+    .ribbon-top-right::before,
+    .ribbon-top-right::after {
+        border-top-color: transparent;
+        border-right-color: transparent
+    }
+
+    .ribbon-top-right::before {
+        top: 0;
+        left: 17px
+    }
+
+    .ribbon-top-right::after {
+        bottom: 17px;
+        right: 0
+    }
+
+    .sold_stars i {
+        color: orange
+    }
+
+    .ribbon-top-right span {
+        right: 17px;
+        top: 17px
+    }
+
+    div {
+        display: block;
+        position: relative;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box
+    }
+
+    .bbb_deals_featured {
+        width: 100%
+    }
+
+    .bbb_deals {
+        width: 100%;
+        margin-right: 7%;
+        padding-top: 80px;
+        padding-left: 25px;
+        padding-right: 25px;
+        padding-bottom: 34px;
+        box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        margin-top: 0px
+    }
+
+    .bbb_deals_title {
+        position: absolute;
+        top: 10px;
+        left: 22px;
+        font-size: 18px;
+        font-weight: 500;
+        color: #000000
+    }
+
+    .bbb_deals_slider_container {
+        width: 100%
+    }
+
+    .bbb_deals_item {
+        width: 100% !important
+    }
+
+    .bbb_deals_image {
+        width: 100%
+    }
+
+    .bbb_deals_image img {
+        width: 100%
+    }
+
+    .bbb_deals_content {
+        margin-top: 33px
+    }
+
+    .bbb_deals_item_category a {
+        font-size: 14px;
+        font-weight: 400;
+        color: rgba(0, 0, 0, 0.5)
+    }
+
+    .bbb_deals_item_price_a {
+        font-size: 14px;
+        font-weight: 400;
+        color: rgba(0, 0, 0, 0.6)
+    }
+
+    .bbb_deals_item_price_a strike {
+        color: red
+    }
+
+    .bbb_deals_item_name {
+        font-size: 24px;
+        font-weight: 400;
+        color: #000000
+    }
+
+    .bbb_deals_item_price {
+        font-size: 24px;
+        font-weight: 500;
+        color: #6d6e73
+    }
+
+    .available {
+        margin-top: 19px
+    }
+
+    .available_title {
+        font-size: 16px;
+        color: rgba(0, 0, 0, 0.5);
+        font-weight: 400
+    }
+
+    .available_title span {
+        font-weight: 700
+    }
+
+    @media only screen and (max-width: 991px) {
+        .bbb_deals {
+            width: 100%;
+            margin-right: 0px
+        }
+    }
+
+    @media only screen and (max-width: 575px) {
+        .bbb_deals {
+            padding-left: 15px;
+            padding-right: 15px
+        }
+
+        .bbb_deals_title {
+            left: 15px;
+            font-size: 16px
+        }
+
+        .bbb_deals_slider_nav_container {
+            right: 5px
+        }
+
+        .bbb_deals_item_name,
+        .bbb_deals_item_price {
+            font-size: 20px
+        }
+    }
+
     /*--------------------------------------------------------- //header */
     /* Set background color of header */
     header {
@@ -151,7 +368,7 @@
     .card {
         cursor: pointer;
         border-radius: 0;
-        height: 330px;
+        height: 280px;
     }
 
     .card.cate1 {
@@ -188,6 +405,7 @@
         height: 500px;
         display: flex;
         justify-content: space-between;
+        flex-wrap: wrap;
     }
 
     /* // hero image */
@@ -195,7 +413,7 @@
         display: flex;
         /* position: relative; */
         height: 270px;
-        background: linear-gradient(315deg, rgba(249,248,113,1) 0%, rgba(255,199,95,1) 14%, rgba(255,150,113,1) 30%, rgba(255,111,145,1) 48%, rgba(214,93,177,1) 71%, rgba(132,94,194,1) 100%);
+        background: linear-gradient(315deg, rgba(249, 248, 113, 1) 0%, rgba(255, 199, 95, 1) 14%, rgba(255, 150, 113, 1) 30%, rgba(255, 111, 145, 1) 48%, rgba(214, 93, 177, 1) 71%, rgba(132, 94, 194, 1) 100%);
         flex-direction: column;
         justify-content: space-around;
         align-items: flex-start;
@@ -217,10 +435,60 @@
         cursor: pointer;
     }
 
+    .pane {
+        margin-top: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+
     .hero-text button:hover {
         background-color: #555;
         color: white;
     }
+
+    .wrapper-card {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 200px;
+    }
+
+    .card-price {
+        color: red;
+    }
+
+    .wrapper-price {
+        display: flex;
+        justify-content: space-between;
+
+    }
+
+    /* // */
+    .wrapper-information {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .item-more {
+        width: 37rem;
+        position: relative;
+    }
+
+    .kk {
+        margin: auto;
+        width: 80%;
+        margin-top: 200px;
+    }
+
+    .child-more{
+        left: 45px;
+    position: absolute;
+    /* top: 0; */
+    bottom: 30px;
+    color: #fff;
+    }
+
+
 </style>
 
 <body>
@@ -228,11 +496,11 @@
     <div class="component">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Kid_pear</a>
+                <a class="navbar-brand" href="/">Kid_pear</a>
 
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Shop</a>
+                        <a class="nav-link active" aria-current="page" href="/shops">Shop</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">News</a>
@@ -241,7 +509,7 @@
                         <a class="nav-link" href="#">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
+                        <a class="nav-link" href="/about">About</a>
                     </li>
                 </ul>
 
@@ -266,6 +534,8 @@
     <!-- End banner-->
 
     <!--Start body-->
+
+
     <div class="container-fluid cate">
         <div class="more-cate">
             <h3 class="category-product-header">Shop category</h1>
@@ -299,65 +569,159 @@
         </div>
         <!-- // hero page -->
 
-        <h1 class="category-product-header">Quần</h1>
+        <div class="pane">
+            <h1 class="category-product-header" style="margin-top: 75px;">Áo</h1>
+            <div class="more">
+                <a href="/login" className="text-sm font-semibold leading-6 text-gray-900">
+                    Xem tất cả <span aria-hidden="true">&rarr;</span>
+                </a>
+            </div>
 
-        <div class="card-columns shirts">
-            <% for(let i=0; i < dataTable.length; i++){ %>
-                <div class="card" style="width:250px">
-                    <img class="card-img-top" style="width:100%" src="<%= dataTable[i].imageSrc %>">
-                    <div class="card-body" style="padding-left: 0px;
-                    padding-right: 0px;
-                ">
-                        <h4 class="card-name" style="font-size: inherit;">
-                            <%= dataTable[i].name %>
-                        </h4>
-                        <div style="display: flex; justify-content: space-between;">
-                            <p class="card-color" style="opacity: 0.8;">
-                                <%= dataTable[i].color %>
+        </div>
+
+
+
+        <div class="wrapper-card">
+            <% for(let i=0; i < 4; i++) { %>
+                <div class="card" style="width: 18rem;">
+                    <img src="<%= dataTable[i].imageSrc %>" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <a class="card-title" href="/detail-product?id=<%= dataTable[i].id %>"> 
+                            <%= dataTable[i].nameProduct %>
+                        </a>
+                        <p class="card-text">
+                            <%= dataTable[i].Desc %>
+                        </p>
+                        <div class="wrapper-price">
+                            <p class="card-price">
+                                <%= dataTable[i].price %>
                             </p>
-                            <p class="cart-price" style="color: red;">
-                                <%= dataTable[i].price %> VND
-                            </p>
+                            <a href="#" class="btn btn-primary">Thêm</a>
                         </div>
-                        <a href="#" style="width: 100%;" class="btn btn-primary stretched-link">Thêm</a>
                     </div>
                 </div>
                 <% } %>
         </div>
+        <!-- /////////////////////////////// -->
+        <div class="pane">
+            <h1 class="category-product-header" style="margin-top: 75px;">Quần</h1>
+            <div class="more">
+                <a href="/login" className="text-sm font-semibold leading-6 text-gray-900">
+                    Xem tất cả <span aria-hidden="true">&rarr;</span>
+                </a>
+            </div>
+
+        </div>
 
 
-        <h1 class="category-product-header">Áo</h1>
 
-        <div class="card-columns shirts">
-            <% for(let i=0; i < dataTable.length; i++){ %>
-                <div class="card" style="width:250px">
-                    <img class="card-img-top" style="width:100%" src="<%= dataTable[i].imageSrc %>">
-                    <div class="card-body" style="padding-left: 0px;
-                    padding-right: 0px;
-                ">
-                        <h4 class="card-name" style="font-size: inherit;">
-                            <%= dataTable[i].name %>
-                        </h4>
-                        <div style="display: flex; justify-content: space-between;">
-                            <p class="card-color" style="opacity: 0.8;">
-                                <%= dataTable[i].color %>
+        <div class="wrapper-card">
+            <% for(let i=4; i < 8; i++) { %>
+                <div class="card" style="width: 18rem;">
+                    <img src="<%= dataTable[i].imageSrc %>" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%= dataTable[i].nameProduct %>
+                        </h5>
+                        <p class="card-text">
+                            <%= dataTable[i].Desc %>
+                        </p>
+                        <div class="wrapper-price">
+                            <p class="card-price">
+                                <%= dataTable[i].price %>
                             </p>
-                            <p class="cart-price" style="color: red;">
-                                <%= dataTable[i].price %> VND
-                            </p>
+                            <a href="#" class="btn btn-primary">Thêm</a>
                         </div>
-                        <a href="#" style="width: 100%;" class="btn btn-primary stretched-link">Thêm</a>
                     </div>
                 </div>
                 <% } %>
         </div>
     </div>
+
+    <!-- // -->
+    <div class="kk">
+        <h4>EXPLORE MORE FROM JORDAN</h4>
+
+        <div class="wrapper-information">
+            <div class="item-more">
+                <img style="width: 100%;" class="img-more"
+                    src="https://static.nike.com/a/images/f_auto/dpr_1.3,cs_srgb/w_706,c_limit/78d712ea-db3c-47da-b09c-f7cedb2f2557/jordan.jpg"
+                    alt="">
+                <div class="child-more">
+                    <h5>Explore Jordan Basketball</h5>
+                    <button>Shop</button>
+                </div>
+            </div>
+
+            <div class="item-more">
+                <img style="width: 100%;" class="img-more"
+                    src="https://static.nike.com/a/images/f_auto/dpr_1.3,cs_srgb/w_706,c_limit/b208f842-84d5-4e41-ab9c-626149b388b4/jordan.jpg"
+                    alt="">
+                <div class="child-more">
+                    <h5>Explore the Colection</h5>
+                    <button>Learn more</button>
+                </div>
+            </div>
+        </div>
     </div>
-
-
-
+    <!--  // -->
 
     <!--End body-->
+
+    <!-- footer -->
+    <!-- Remove the container if you want to extend the Footer to full width. -->
+<div class="container footer my-5">
+
+    <footer style="background-color: #eee6d3;">
+      <div class="container p-4">
+        <div class="row">
+          <div class="col-lg-6 col-md-12 mb-4">
+            <h5 class="mb-3 text-dark">footer content</h5>
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
+              molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam
+              voluptatem veniam, est atque cumque eum delectus sint!
+            </p>
+          </div>
+          <div class="col-lg-3 col-md-6 mb-4">
+            <h5 class="mb-3 text-dark">links</h5>
+            <ul class="list-unstyled mb-0">
+              <li class="mb-1">
+                <a href="#!" style="color: #4f4f4f;">FAQ</a>
+              </li>
+              <li class="mb-1">
+                <a href="#!" style="color: #4f4f4f;">Classes</a>
+              </li>
+              <li class="mb-1">
+                <a href="#!" style="color: #4f4f4f;">Pricing</a>
+              </li>
+              <li>
+                <a href="#!" style="color: #4f4f4f;">Safety</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-3 col-md-6 mb-4">
+            <h5 class="mb-1 text-dark">opening hours</h5>
+            <table class="table" style="border-color: #666;">
+              <tbody>
+                <tr>
+                  <td>Mon - Fri:</td>
+                  <td>8am - 9pm</td>
+                </tr>
+                <tr>
+                  <td>Sat - Sun:</td>
+                  <td>8am - 1am</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- Copyright -->
+    </footer>
+    
+  </div>
+  <!-- End of .container -->
 </body>
 
 
