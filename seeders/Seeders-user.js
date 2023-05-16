@@ -13,7 +13,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-   return queryInterface.bulkInsert('user',[
+   return queryInterface.bulkInsert('users',[
     {
         UseName: 'Chubinbmt02',
         passWord: '123456',

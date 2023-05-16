@@ -14,7 +14,7 @@ let initWebRoutes = (app) =>{
     router.get('/contacts',  homeControler.getAboutPage)  // chưa làm
 
     router.get('/detail-product',  homeControler.getDetailProduct)
-
+    router.get('/cart-product',  homeControler.addProducttoCart)
 
 
     router.get('/crud',  homeControler.getData)
@@ -25,10 +25,11 @@ let initWebRoutes = (app) =>{
     router.get('/edit-crud',  homeControler.getEditCRUD)
     router.post('/put-crud',  homeControler.putCRUD)
     router.get('/delete-crud',  homeControler.deleteCRUD) 
-
+-
 
     // api
-    router.post('/api/login',  userControler.handelLogin) 
+    router.get('/login',  userControler.handleLogin) 
+    router.get('/register',  userControler.handleRegister) 
 
 
     router.get('/', (req,res)=>{

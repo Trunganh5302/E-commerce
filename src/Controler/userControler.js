@@ -1,10 +1,24 @@
-let handelLogin = (req,res) => {
-    return res.status(200).json({  // api trả về 1 status, 200 là ở trạng thái bình thường
-        message: 'trung anh test api'
-    })                              
-        
+import db from '/CODE/Linh tinh/Example/BackendEcommerce/models/index'
+
+let handleLogin = (req,res) => {
+    return res.render('login.ejs')
+}
+
+let handleRegister = async (req, res) => {
+    
+
+    try {
+        let data = await db.Users.findAll(); // tham chiếu đến database gọi tất cả dữ liệu có trong đó
+        console.log('===========')
+        console.log(data)
+        return res.send('register.ejs')
+
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 module.exports = {
-    handelLogin: handelLogin
+    handleLogin: handleLogin,
+    handleRegister:handleRegister
 }
