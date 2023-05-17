@@ -229,54 +229,71 @@
                         <div class="col">
                             <h4><b>Shopping Cart</b></h4>
                         </div>
-                        
-                            <div class="col align-self-center text-right text-muted"><%= dataTable.length %> sản phẩm</div>
-                                             
+
+                        <div class="col align-self-center text-right text-muted">
+                            <%= dataTable.length %> sản phẩm
+                        </div>
+
                     </div>
                 </div>
 
                 <!-- //product cart// -->
-                <% for(let i=0; i < dataTable.length; i++){ %>
-                <div class="row border-top border-bottom">
-                    <div class="row main align-items-center">
-                        <div class="col-2"><img class="img-fluid" src="<%= dataTable[i].imageSrc %>"></div>
-                        <div class="col">
-                            <div class="row text-muted"><%= dataTable[i].NameCategory %></div>
-                            <div class="row">Cotton T-shirt</div>
-                        </div>
-                        <div class="col">
-                            <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
-                        </div>
-                        <div class="col">&euro; <%= dataTable[i].Price %><a class="close">&#10005;</a></div>
-                    </div>
-                </div>
-                <% } %>
-                <!-- end product cart -->
 
-                <div class="back-to-shop"><a href="#">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
+                <% for(let i=0; i < dataTable.length; i++){ %>
+                    <div class="row border-top border-bottom">
+                        <div class="row main align-items-center">
+                            <div class="col-2"><img class="img-fluid" src="<%= dataTable[i].imageSrc %>"></div>
+                            <div class="col">
+                                <div class="row text-muted">
+                                    <%= dataTable[i].NameCategory %>
+                                </div>
+                                <div class="row">Cotton T-shirt</div>
+                            </div>
+                            <div class="col">
+                                <a  id="decrease" style="cursor: pointer;">-</a>
+                                <a  id="value" class="border">1</a>
+                                <a  id="increase" style="cursor: pointer;">+</a>
+                            </div>
+                            <div class="col">&euro; <%= dataTable[i].Price %><a
+                                        href="/delete-cartProduct?id=<%= dataTable[i].id %>" class="close">&#10005;</a>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+                        <!-- end product cart -->
+
+                        <div class="back-to-shop"><a href="/">&leftarrow;</a><span class="text-muted">Back to
+                                shop</span></div>
             </div>
 
-            
+
             <div class="col-md-4 summary">
                 <div>
-                    <h5><b>Summary</b></h5>
+                    <h5><b>Thanh toán</b></h5>
                 </div>
                 <hr>
                 <div class="row">
-                    <div class="col" style="padding-left:0;">ITEMS 3</div>
-                    <div class="col text-right">&euro; 132.00</div>
+                    <div class="col" style="padding-left:0;">Thành tiền</div>
+                    <% let total=0; %>
+                        <% for(let i=0; i < dataTable.length; i++) { %>
+                            <% total +=dataTable[i].Price; %>
+                                <% } %>
+                                    <div id="productPrice" class="col text-right">&euro; <%= total %>
+                                    </div>
                 </div>
                 <form>
-                    <p>SHIPPING</p>
+                    <p>Hình thức thanh toán</p>
                     <select>
-                        <option class="text-muted">Standard-Delivery- &euro;5.00</option>
+                        <option class="text-muted">Thanh toán khi nhận hàng</option>
+                        <option class="text-muted">Thanh toán qua thẻ ngân hàng</option>
                     </select>
-                    <p>GIVE CODE</p>
+                    <p>Mã giảm giá</p>
                     <input id="code" placeholder="Enter your code">
                 </form>
                 <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
-                    <div class="col">TOTAL PRICE</div>
-                    <div class="col text-right">&euro; 137.00</div>
+                    <div class="col">Tổng tiền</div>
+                    <div class="col text-right">&euro; <%= total %>
+                    </div>
                 </div>
                 <button class="btn">CHECKOUT</button>
             </div>
@@ -284,5 +301,30 @@
 
     </div>
 </body>
+<script>
+    const decreaseButton = document.getElementById('decrease');
+    const valueElement = document.getElementById('value');
+    const increaseButton = document.getElementById('increase');
+    const totalElement = document.getElementById('total');
+    const productPriceElement = document.getElementById('productPrice');
+
+    let value = parseInt(valueElement.textContent);
+
+    decreaseButton.addEventListener('click', () => {
+        if (value > 1) {
+            value--;
+            valueElement.textContent = value.toString();
+            console.log("tăng")
+        }
+    });
+
+    increaseButton.addEventListener('click', () => {
+        value++;
+        valueElement.textContent = value.toString();
+    });
+
+
+
+</script>
 
 </html>

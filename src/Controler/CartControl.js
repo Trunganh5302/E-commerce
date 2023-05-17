@@ -19,7 +19,20 @@ let addToCart = async (req,res) => {
     return res.send('CartProduct.ejs')
 }
 
+let deleteProductCart = async (req,res) =>{
+    let cartID =  req.query.id;
+    if (cartID) {
+        await CRUDBill.deleteCartbyId(cartID)
+        return res.redirect("/cart-product2");
+        
+    }else{
+        return res.send("Không tìm thấy Product")
+    }
+    
+    
+}
 module.exports = {
     ShowCart:ShowCart,
-    addToCart:addToCart
+    addToCart:addToCart,
+    deleteProductCart:deleteProductCart
 }

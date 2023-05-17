@@ -20,21 +20,39 @@ let createNewCart = (data) => {
                 userID: 1,
                 productID: 1,
                 imageSrc: data.imageSrc,
-                idCategory: 1,
+                idCategory: data.idCategory,
                 NameCategory: "Áo nhà NIKE",
                 nameProduct: data.nameProduct,
                 Price: data.Price,
                 Quantity: 2,
             })
-
             resolve("Oke create a new product");
         } catch (error) {
             reject(error)
         }
-    })  
+    })
+      
+}
+
+let deleteCartbyId = (CartID) => {
+    return new Promise(async(resolve, reject) => {
+        try {
+            let cart = await db.Carts.findOne({
+                where: {id: CartID}
+            })
+
+            if (cart) {
+                await cart.destroy()
+            }
+            resolve(); // return
+        } catch (error) {
+            reject(error)
+        }
+    })
 }
 
 module.exports = {
     getAllCart:getAllCart,
-    createNewCart:createNewCart
+    createNewCart:createNewCart,
+    deleteCartbyId:deleteCartbyId
 }

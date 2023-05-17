@@ -315,8 +315,10 @@
 
             <div class="action">
               <a href="/port-cart" method='POST' id="addToCartButton" class="add-to-cart btn btn-default"
-                type="button">add to cart</a>
+                type="button">Thêm vào giỏ hàng</a>
             </div>
+            <span class="idProduct" hidden><%= product.id %></span>
+            <span class="idCate" hidden><%= product.categoryID %></span>
           </div>
         </div>
       </div>
@@ -327,6 +329,7 @@
 </body>
 <script>
   // Bắt sự kiện click trên thẻ <a>
+  
   document.querySelector('.add-to-cart').addEventListener('click', function (event) {
     event.preventDefault(); // Ngăn chặn hành vi mặc định của thẻ <a>
 
@@ -334,7 +337,7 @@
     let userID = 1;
     let productID = 1;
     let imageSrc = document.querySelector('#pic-1 img').getAttribute('src');
-    let idCategory = 1;
+    let idCategory = document.querySelector('.idCate').textContent;
     let nameProduct = document.querySelector('.product-title').textContent;
     let Price = document.querySelector('.price span').textContent;
     let Quantity = 2
@@ -360,6 +363,8 @@
       .then(response => response.json())
       .then(data => {
         console.log(data); // Log kết quả từ server
+        alert("Thêm thành công")
+        window.location.href='/cart-product2'
       })
       .catch(error => {
         console.error('Error:', error);

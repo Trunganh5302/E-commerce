@@ -18,6 +18,8 @@ let initWebRoutes = (app) =>{
 
     router.get('/cart-product2',  CartControl.ShowCart)
     router.post('/port-cart',  CartControl.addToCart)
+    router.get('/delete-cartProduct',  CartControl.deleteProductCart)
+
 
     router.get('/crud',  homeControler.getData)
 
