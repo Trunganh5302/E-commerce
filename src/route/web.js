@@ -3,6 +3,7 @@
 import express from "express";
 import homeControler from "../Controler/homeControler";
 import userControler from "../Controler/userControler";
+import CartControl from "../Controler/CartControl"
 
 let router = express.Router();
 let initWebRoutes = (app) =>{
@@ -14,8 +15,9 @@ let initWebRoutes = (app) =>{
     router.get('/contacts',  homeControler.getAboutPage)  // chưa làm
 
     router.get('/detail-product',  homeControler.getDetailProduct)
-    router.get('/cart-product',  homeControler.addProducttoCart)
 
+    router.get('/cart-product2',  CartControl.ShowCart)
+    router.post('/port-cart',  CartControl.addToCart)
 
     router.get('/crud',  homeControler.getData)
 

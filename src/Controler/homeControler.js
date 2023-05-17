@@ -118,10 +118,6 @@ let getCategory = async (req,res) => {
     })
 }
 
-let addProducttoCart = async (req,res) => {
-    return res.render('CartProduct.ejs')
-}
-
 module.exports = {  
     getHomePage: getHomePage,
     getAboutPage: getAboutPage,
@@ -134,6 +130,5 @@ module.exports = {
     getProduct:getProduct,
     getCategory:getCategory,
     getShop:getShop,
-    getDetailProduct:getDetailProduct,
-    addProducttoCart:addProducttoCart
+    getDetailProduct:getDetailProduct
 }
