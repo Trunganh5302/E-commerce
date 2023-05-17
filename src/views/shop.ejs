@@ -391,7 +391,6 @@
         top: 0;
         position: absolute;
         font-size: x-large;
-        font-family: math;
         /* margin-top: -377px; */
         display: flex;
         justify-content: center;
@@ -436,7 +435,6 @@
     }
 
     .pane {
-        margin-top: 30px;
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
@@ -451,6 +449,7 @@
         display: flex;
         justify-content: space-between;
         margin-bottom: 200px;
+        flex-wrap: wrap;
     }
 
     .card-price {
@@ -480,15 +479,152 @@
         margin-top: 200px;
     }
 
-    .child-more{
+    .child-more {
         left: 45px;
-    position: absolute;
-    /* top: 0; */
-    bottom: 30px;
-    color: #fff;
+        position: absolute;
+        /* top: 0; */
+        bottom: 30px;
+        color: #fff;
     }
 
 
+    .mt-100 {
+        width: 150%;
+        margin-top: 70px;
+    }
+
+    .filter-group {
+        border-bottom: 1px solid #e4e4e4;
+    }
+
+    .card {
+        position: relative;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 0.37rem;
+    }
+
+    .card-header {
+        padding: 0.75rem 1.25rem;
+        margin-bottom: 0;
+        background-color: #fff;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .filter-group .card-header {
+        border-bottom: 0;
+    }
+
+    .icon-control {
+        margin-top: 6px;
+        float: right;
+        font-size: 80%;
+    }
+
+    .list-menu {
+        list-style: none;
+        margin: 0;
+        padding-left: 0;
+    }
+
+    .list-menu a {
+        color: #343a40;
+    }
+
+    a {
+
+        text-decoration: none !important;
+        background-color: transparent;
+    }
+
+
+    .checkbox-btn {
+        position: relative;
+    }
+
+    .checkbox-btn input {
+        position: absolute;
+        z-index: -1;
+        opacity: 0;
+    }
+
+
+    .checkbox-btn input:checked~.btn {
+        border-color: #3167eb;
+        background-color: #3167eb;
+        color: #fff;
+    }
+
+    .btn-light {
+        display: inline-block;
+        font-weight: 600;
+        color: #343a40;
+        text-align: center;
+        vertical-align: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        background-color: #eee;
+        border: 1px solid #eee;
+        padding: 0.45rem 0.85rem;
+        font-size: 10px;
+        line-height: 1.5;
+        border-radius: 0.37rem;
+
+    }
+
+    .btn-light:hover {
+        background-color: #fff;
+        border-color: #989898;
+    }
+
+
+    .btn-medium {
+        font-size: 12px;
+        padding: 10px 22px;
+        display: inline-block;
+        margin-right: 20px;
+        letter-spacing: 2px;
+
+        border: 1px solid #157af6;
+        width: 100%;
+    }
+
+    .highlight-button:hover {
+        background-color: #157af6;
+        border: 2px solid #157af6;
+        color: #fff;
+    }
+
+    .custom-control {
+        position: relative;
+        display: block;
+        min-height: 1.5rem;
+        padding-left: 1.5rem;
+    }
+
+    .container-fluid2{
+        display: flex;
+    }
+    
+    .sidebar{
+        width: 85%;
+    }
+
+    .oke{
+        height: 500px;
+    }
 </style>
 
 <body>
@@ -527,84 +663,165 @@
     <!--Start body-->
 
 
-        <!-- // hero page -->
-        <div class="hero-image">
-            <div class="hero-text">
-                <p>__kid-pear__</p>
-                <h1 style="font-size:50px">AMAZON DELIVERS TO YOU</h1>
-                <p>Sự hài lòng của khách hàng là ưu tiên hàng đầu của chúng tôi</p>
-                <button>Contact me</button>
+
+
+
+    <!-- // hero page -->
+    <div class="hero-image">
+        <div class="hero-text">
+            <p>__kid-pear__</p>
+            <h1 style="font-size:50px">AMAZON DELIVERS TO YOU</h1>
+            <p>Sự hài lòng của khách hàng là ưu tiên hàng đầu của chúng tôi</p>
+            <button>Contact me</button>
+        </div>
+    </div>
+    <!-- // hero page -->
+    <div class="container-fluid2">
+        <div class="container-fluid mt-100">
+
+
+            <div class="row d-flex justify-content-center">
+
+                <div class=" sidebar">
+
+
+                    <div class="card oke">
+                        <article class="filter-group">
+                            <header class="card-header">
+                                <a href="#" data-toggle="collapse" data-target="#collapse_aside1" 
+                                    aria-expanded="false" class="collapsed">
+                                    <i class="icon-control fa fa-chevron-down"></i>
+                                    <h6 class="title">Categories </h6>
+                                </a>
+                            </header>
+                            <div class="filter-content collapse" id="collapse_aside1" style="">
+                                <div class="card-body">
+
+                                    <ul class="list-menu">
+                                        <li><a href="#" data-abc="true">Áo thun </a></li>
+                                        <li><a href="#" data-abc="true">Quần </a></li>
+                                        <li><a href="#" data-abc="true">Giày </a></li>
+                                        <li><a href="#" data-abc="true">Ván trượt </a></li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="filter-group">
+                            <header class="card-header">
+                                <a href="#" data-toggle="collapse" data-target="#collapse_aside3" data-abc="true"
+                                    aria-expanded="false" class="collapsed">
+                                    <i class="icon-control fa fa-chevron-down"></i>
+                                    <h6 class="title">Size </h6>
+                                </a>
+                            </header>
+                            <div class="filter-content collapse" id="collapse_aside3" style="">
+                                <div class="card-body">
+                                    <label class="checkbox-btn">
+                                        <input type="checkbox">
+                                        <span class="btn btn-light"> XS </span>
+                                    </label>
+
+                                    <label class="checkbox-btn">
+                                        <input type="checkbox">
+                                        <span class="btn btn-light"> SM </span>
+                                    </label>
+
+                                    <label class="checkbox-btn">
+                                        <input type="checkbox">
+                                        <span class="btn btn-light"> LG </span>
+                                    </label>
+
+                                    <label class="checkbox-btn">
+                                        <input type="checkbox">
+                                        <span class="btn btn-light"> XXL </span>
+                                    </label>
+                                    <label class="checkbox-btn">
+                                        <input type="checkbox">
+                                        <span class="btn btn-light"> XXXL </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="filter-group">
+                            <header class="card-header">
+                                <a href="#" data-toggle="collapse" data-target="#collapse_aside4" data-abc="true"
+                                    class="collapsed" aria-expanded="false">
+                                    <i class="icon-control fa fa-chevron-down"></i>
+                                    <h6 class="title">Rating </h6>
+                                </a>
+                            </header>
+                            <div class="filter-content collapse" id="collapse_aside4" style="">
+                                <div class="card-body">
+                                    <label class="custom-control">
+                                        <input type="checkbox" checked="" class="custom-control-input">
+                                        <div class="custom-control-label">Better </div>
+                                    </label>
+
+                                    <label class="custom-control">
+                                        <input type="checkbox" checked="" class="custom-control-input">
+                                        <div class="custom-control-label">Best </div>
+                                    </label>
+
+                                    <label class="custom-control">
+                                        <input type="checkbox" checked="" class="custom-control-input">
+                                        <div class="custom-control-label">Good</div>
+                                    </label>
+
+                                    <label class="custom-control">
+                                        <input type="checkbox" checked="" class="custom-control-input">
+                                        <div class="custom-control-label">Not good</div>
+                                    </label>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                </div>
+
             </div>
         </div>
-        <!-- // hero page -->
 
-        <div class="pane">
-            <h1 class="category-product-header" style="margin-top: 75px;">Áo</h1>
-            <div class="more">
-                <a href="/login" className="text-sm font-semibold leading-6 text-gray-900">
-                    Xem tất cả <span aria-hidden="true">&rarr;</span>
-                </a>
-            </div>
+        <div>
+            <div>
+                <div class="pane">
+                    <h1 class="category-product-header" style="margin-top: 75px;">Tất cả sản phẩm</h1>
 
-        </div>
+                </div>
 
 
 
-        <div class="wrapper-card">
-            <% for(let i=0; i < 4; i++) { %>
-                <div class="card" style="width: 18rem;">
-                    <img src="<%= dataTable[i].imageSrc %>" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">
+                <div class="wrapper-card">
+                    <% for(let i=0; i < dataTable.length; i++) { %>
+                      <div class="card" style="width: calc(25% - 20px); height: 553px; margin-bottom: 25px;">
+                        <img src="<%= dataTable[i].imageSrc %>" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <a class="card-title" href="/detail-product?id=<%= dataTable[i].id %>">
                             <%= dataTable[i].nameProduct %>
-                        </h5>
-                        <p class="card-text">
+                          </a>
+                          <p class="card-text">
                             <%= dataTable[i].Desc %>
-                        </p>
-                        <div class="wrapper-price">
+                          </p>
+                          <div class="wrapper-price">
                             <p class="card-price">
-                                <%= dataTable[i].price %>
+                              <%= dataTable[i].price %>
                             </p>
                             <a href="#" class="btn btn-primary">Thêm</a>
+                          </div>
                         </div>
-                    </div>
-                </div>
-                <% } %>
-        </div>
-        <!-- /////////////////////////////// -->
-        <div class="pane">
-            <h1 class="category-product-header" style="margin-top: 75px;">Quần</h1>
-            <div class="more">
-                <a href="/login" className="text-sm font-semibold leading-6 text-gray-900">
-                    Xem tất cả <span aria-hidden="true">&rarr;</span>
-                </a>
+                      </div>
+                    <% } %>
+                  </div>
+                  
             </div>
-
+            <!-- /////////////////////////////// -->
         </div>
+    </div>
 
 
 
-        <div class="wrapper-card">
-            <% for(let i=4; i < 8; i++) { %>
-                <div class="card" style="width: 18rem;">
-                    <img src="<%= dataTable[i].imageSrc %>" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <%= dataTable[i].nameProduct %>
-                        </h5>
-                        <p class="card-text">
-                            <%= dataTable[i].Desc %>
-                        </p>
-                        <div class="wrapper-price">
-                            <p class="card-price">
-                                <%= dataTable[i].price %>
-                            </p>
-                            <a href="#" class="btn btn-primary">Thêm</a>
-                        </div>
-                    </div>
-                </div>
-                <% } %>
-        </div>
+
     </div>
 
 
@@ -612,58 +829,10 @@
 
     <!-- footer -->
     <!-- Remove the container if you want to extend the Footer to full width. -->
-<div class="container footer my-5">
 
-    <footer style="background-color: #eee6d3;">
-      <div class="container p-4">
-        <div class="row">
-          <div class="col-lg-6 col-md-12 mb-4">
-            <h5 class="mb-3 text-dark">footer content</h5>
-            <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
-              molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam
-              voluptatem veniam, est atque cumque eum delectus sint!
-            </p>
-          </div>
-          <div class="col-lg-3 col-md-6 mb-4">
-            <h5 class="mb-3 text-dark">links</h5>
-            <ul class="list-unstyled mb-0">
-              <li class="mb-1">
-                <a href="#!" style="color: #4f4f4f;">FAQ</a>
-              </li>
-              <li class="mb-1">
-                <a href="#!" style="color: #4f4f4f;">Classes</a>
-              </li>
-              <li class="mb-1">
-                <a href="#!" style="color: #4f4f4f;">Pricing</a>
-              </li>
-              <li>
-                <a href="#!" style="color: #4f4f4f;">Safety</a>
-              </li>
-            </ul>
-          </div>
-          <div class="col-lg-3 col-md-6 mb-4">
-            <h5 class="mb-1 text-dark">opening hours</h5>
-            <table class="table" style="border-color: #666;">
-              <tbody>
-                <tr>
-                  <td>Mon - Fri:</td>
-                  <td>8am - 9pm</td>
-                </tr>
-                <tr>
-                  <td>Sat - Sun:</td>
-                  <td>8am - 1am</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-      <!-- Copyright -->
-    </footer>
-    
-  </div>
-  <!-- End of .container -->
+
+
+    <!-- End of .container -->
 </body>
 
 
