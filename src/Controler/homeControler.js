@@ -4,24 +4,37 @@ import CRUDProduct from '../Service/CRUDProduct';
 import CRUDCategory from '../Service/CRUDCategory'
 
 
-let getHomePage = async (req,res) =>{
-
+let getHomePage = async (req, res) => {
+    let userLoggedIn = false;
+    let username = "";
+  
     try {
-        let data = await db.Product.findAll(); // tham chiếu đến database gọi tất cả dữ liệu có trong đó
-        console.log('===========')
-        console.log(data)
-        return res.render('Homepage.ejs', {
-            data: JSON.stringify(data)
-        })
-
+      if (req.session.userId) {
+        userLoggedIn = true;
+        username = req.session.username;
+      }
+    
+      let data = await db.Product.findAll();
+    
+      console.log('===========');
+      console.log(data);
+    
+      return res.render('Homepage.ejs', {
+        userLoggedIn: userLoggedIn, // Truyền giá trị userLoggedIn
+        username: matchedUser.userName, // Truyền giá trị username
+        data: JSON.stringify(data)
+      });
     } catch (error) {
-        console.log(error)
+      console.log(error);
     }
-
-
-}
+  };
+  
+  
+  
+  
 
 let getAboutPage = (req, res) => {
+    console.log("UserID là ",req.session.userId)
     return res.render('about.ejs')
 }
 

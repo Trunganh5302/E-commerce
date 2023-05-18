@@ -480,15 +480,13 @@
         margin-top: 200px;
     }
 
-    .child-more{
+    .child-more {
         left: 45px;
-    position: absolute;
-    /* top: 0; */
-    bottom: 30px;
-    color: #fff;
+        position: absolute;
+        /* top: 0; */
+        bottom: 30px;
+        color: #fff;
     }
-
-
 </style>
 
 <body>
@@ -513,11 +511,20 @@
                     </li>
                 </ul>
 
-                <div>
-                    <a href="/login" className="text-sm font-semibold leading-6 text-gray-900">
-                        Log in <span aria-hidden="true">&rarr;</span>
-                    </a>
-                </div>
+                <% if (locals.userLoggedIn === true) { %> <!-- Kiểm tra userLoggedIn bằng true -->
+                    <div>
+                      <%= locals.username %> đã đăng nhập thành công.
+                      <a href="/logout" class="text-sm font-semibold leading-6 text-gray-900">Đăng xuất</a>
+                    </div>
+                  <% } else { %>
+                    <div>
+                      <a href="/login" className="text-sm font-semibold leading-6 text-gray-900">
+                        Đăng nhập <span aria-hidden="true">&rarr;</span>
+                      </a>
+                    </div>
+                  <% } %>
+                
+
             </div>
         </nav>
     </div>
@@ -586,7 +593,7 @@
                 <div class="card" style="width: 18rem;">
                     <img src="<%= dataTable[i].imageSrc %>" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <a class="card-title" href="/detail-product?id=<%= dataTable[i].id %>"> 
+                        <a class="card-title" href="/detail-product?id=<%= dataTable[i].id %>">
                             <%= dataTable[i].nameProduct %>
                         </a>
                         <p class="card-text">
@@ -631,7 +638,7 @@
                                 <%= dataTable[i].price %>
                             </p>
                             <a href="/port-cart" method='POST' id="addToCartButton" class="btn btn-primary"
-                            type="button">Thêm</a>
+                                type="button">Thêm</a>
                         </div>
                     </div>
                 </div>
@@ -671,58 +678,58 @@
 
     <!-- footer -->
     <!-- Remove the container if you want to extend the Footer to full width. -->
-<div class="container footer my-5">
+    <div class="container footer my-5">
 
-    <footer style="background-color: #eee6d3;">
-      <div class="container p-4">
-        <div class="row">
-          <div class="col-lg-6 col-md-12 mb-4">
-            <h5 class="mb-3 text-dark">footer content</h5>
-            <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
-              molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam
-              voluptatem veniam, est atque cumque eum delectus sint!
-            </p>
-          </div>
-          <div class="col-lg-3 col-md-6 mb-4">
-            <h5 class="mb-3 text-dark">links</h5>
-            <ul class="list-unstyled mb-0">
-              <li class="mb-1">
-                <a href="#!" style="color: #4f4f4f;">FAQ</a>
-              </li>
-              <li class="mb-1">
-                <a href="#!" style="color: #4f4f4f;">Classes</a>
-              </li>
-              <li class="mb-1">
-                <a href="#!" style="color: #4f4f4f;">Pricing</a>
-              </li>
-              <li>
-                <a href="#!" style="color: #4f4f4f;">Safety</a>
-              </li>
-            </ul>
-          </div>
-          <div class="col-lg-3 col-md-6 mb-4">
-            <h5 class="mb-1 text-dark">opening hours</h5>
-            <table class="table" style="border-color: #666;">
-              <tbody>
-                <tr>
-                  <td>Mon - Fri:</td>
-                  <td>8am - 9pm</td>
-                </tr>
-                <tr>
-                  <td>Sat - Sun:</td>
-                  <td>8am - 1am</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-      <!-- Copyright -->
-    </footer>
-    
-  </div>
-  <!-- End of .container -->
+        <footer style="background-color: #eee6d3;">
+            <div class="container p-4">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 mb-4">
+                        <h5 class="mb-3 text-dark">footer content</h5>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
+                            molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam
+                            voluptatem veniam, est atque cumque eum delectus sint!
+                        </p>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <h5 class="mb-3 text-dark">links</h5>
+                        <ul class="list-unstyled mb-0">
+                            <li class="mb-1">
+                                <a href="#!" style="color: #4f4f4f;">FAQ</a>
+                            </li>
+                            <li class="mb-1">
+                                <a href="#!" style="color: #4f4f4f;">Classes</a>
+                            </li>
+                            <li class="mb-1">
+                                <a href="#!" style="color: #4f4f4f;">Pricing</a>
+                            </li>
+                            <li>
+                                <a href="#!" style="color: #4f4f4f;">Safety</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <h5 class="mb-1 text-dark">opening hours</h5>
+                        <table class="table" style="border-color: #666;">
+                            <tbody>
+                                <tr>
+                                    <td>Mon - Fri:</td>
+                                    <td>8am - 9pm</td>
+                                </tr>
+                                <tr>
+                                    <td>Sat - Sun:</td>
+                                    <td>8am - 1am</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Copyright -->
+        </footer>
+
+    </div>
+    <!-- End of .container -->
 </body>
 
 

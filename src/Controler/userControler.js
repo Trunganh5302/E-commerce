@@ -1,24 +1,45 @@
-import db from '/CODE/Linh tinh/Example/BackendEcommerce/models/index'
+import db from '/CODE/Linh tinh/Example/BackendEcommerce/models/index';
+import CRUDuser from '../Service/CRUDuser';
 
-let handleLogin = (req,res) => {
-    return res.render('login.ejs')
-}
+const userController = {
+  handleLogin: (req, res) => {
+    return res.render('login.ejs');
+  },
 
-let handleRegister = async (req, res) => {
-    
-
+  handleRegister: async (req, res) => {
     try {
-        let data = await db.Users.findAll(); // tham chiếu đến database gọi tất cả dữ liệu có trong đó
-        console.log('===========')
-        console.log(data)
-        return res.send('register.ejs')
-
+      let data = await db.Users.findAll();
+      console.log('===========');
+      console.log(data);
+      return res.render('register.ejs');
     } catch (error) {
-        console.log(error)
+      console.log(error);
     }
-}
+  },
 
-module.exports = {
-    handleLogin: handleLogin,
-    handleRegister:handleRegister
-}
+  putLogin : async (req, res) => {
+    let dataUser = req.body;
+    let allUsers = await CRUDuser.getAllUser();
+    let matchedUser = null;
+    let userLoggedIn = false; // Khai báo biến userLoggedIn
+  
+    for (let user of allUsers) {
+      if (user.UseName === dataUser.UseName && user.passWord === dataUser.passWord) {
+        matchedUser = user;
+        break;
+      }
+    }
+  
+    if (matchedUser) {
+      console.log("User tìm thấy:", matchedUser);
+      userLoggedIn = true; // Gán giá trị true cho userLoggedIn
+      res.redirect('/');
+      // Thực hiện các hành động khi người dùng khớp
+    } else {
+      res.send('<script>alert("Tên đăng nhập hoặc mật khẩu không đúng"); window.location.href="/login";</script>');
+      // Thực hiện các hành động khi người dùng không khớp
+    }
+  }
+};
+
+export default userController;
