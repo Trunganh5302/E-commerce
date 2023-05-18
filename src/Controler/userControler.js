@@ -3,8 +3,12 @@ import CRUDuser from '../Service/CRUDuser';
 
 const userController = {
   handleLogin: (req, res) => {
-    return res.render('login.ejs');
+    const userLoggedIn = req.session.userLoggedIn || false; // Lấy giá trị userLoggedIn từ session, mặc định là false nếu không tồn tại
+    const username = req.session.username || ''; // Lấy giá trị username từ session, mặc định là chuỗi rỗng nếu không tồn tại
+  
+    return res.render('login.ejs', { userLoggedIn, username });
   },
+  
 
   handleRegister: async (req, res) => {
     try {
@@ -33,13 +37,28 @@ const userController = {
     if (matchedUser) {
       console.log("User tìm thấy:", matchedUser);
       userLoggedIn = true; // Gán giá trị true cho userLoggedIn
+        // Lưu id và userName vào session
+      req.session.userId = matchedUser.id;
+      req.session.username = matchedUser.UseName;
+
       res.redirect('/');
       // Thực hiện các hành động khi người dùng khớp
     } else {
       res.send('<script>alert("Tên đăng nhập hoặc mật khẩu không đúng"); window.location.href="/login";</script>');
       // Thực hiện các hành động khi người dùng không khớp
     }
+  },
+
+  logout : (req, res) => {
+    req.session.destroy((err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.redirect('/');
+      }
+    });
   }
+  
 };
 
 export default userController;

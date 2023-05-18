@@ -37,7 +37,29 @@ const checkLoggedIn = (req, res, next) => {
 
 let initWebRoutes = (app) => {
 
-    router.get('/', homeControler.getCategory)
+    router.get('/', (req, res) => {
+        let userLoggedIn = false;
+        let username = "";
+      
+        if (req.session.userId) {
+          userLoggedIn = true;
+          username = req.session.username;
+          console.log(username)
+        }
+      
+        // Gọi hàm getCategory từ homeControler và truyền req, res nếu cần
+        homeControler.getCategory(req, res, (dataCategory, data) => {
+          return res.render('Homepage.ejs', {
+            userLoggedIn: userLoggedIn,
+            username: username,
+            data: JSON.stringify(data),
+            dataCate: dataCategory,
+            dataTable: data
+            // Các dữ liệu khác...
+          });
+        });
+      });
+    
     router.get('/shops', homeControler.getShop) // chưa làm
     router.get('/about', homeControler.getAboutPage) // chưa làm
     router.get('/news', homeControler.getAboutPage)  // chưa làm
@@ -45,8 +67,8 @@ let initWebRoutes = (app) => {
 
     router.get('/detail-product', homeControler.getDetailProduct)
 
-    router.get('/cart-product2',checkLoggedIn, CartControl.ShowCart)
-    router.post('/port-cart',checkLoggedIn, CartControl.addToCart)
+    router.get('/cart-product2', checkLoggedIn, CartControl.ShowCart)
+    router.post('/port-cart', checkLoggedIn, CartControl.addToCart)
     router.get('/delete-cartProduct', CartControl.deleteProductCart)
 
 
@@ -63,6 +85,7 @@ let initWebRoutes = (app) => {
         // api
         router.get('/login', userControler.handleLogin)
     router.get('/register', userControler.handleRegister)
+    router.get('/logout', userControler.logout) // chưa làm
 
 
     router.post('/put-login', userControler.putLogin)

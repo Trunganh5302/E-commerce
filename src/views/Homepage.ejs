@@ -511,18 +511,19 @@
                     </li>
                 </ul>
 
-                <% if (locals.userLoggedIn === true) { %> <!-- Kiểm tra userLoggedIn bằng true -->
+                <% if (userLoggedIn) { %> <!-- Kiểm tra userLoggedIn bằng true -->
                     <div>
-                      <%= locals.username %> đã đăng nhập thành công.
+                      <%= username %> đã đăng nhập thành công.
                       <a href="/logout" class="text-sm font-semibold leading-6 text-gray-900">Đăng xuất</a>
                     </div>
                   <% } else { %>
                     <div>
-                      <a href="/login" className="text-sm font-semibold leading-6 text-gray-900">
+                      <a href="/login" class="text-sm font-semibold leading-6 text-gray-900">
                         Đăng nhập <span aria-hidden="true">&rarr;</span>
                       </a>
                     </div>
                   <% } %>
+                  
                 
 
             </div>
