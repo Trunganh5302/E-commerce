@@ -368,7 +368,7 @@
     .card {
         cursor: pointer;
         border-radius: 0;
-        height: 280px;
+        height: 480px;
     }
 
     .card.cate1 {
@@ -450,7 +450,6 @@
     .wrapper-card {
         display: flex;
         justify-content: space-between;
-        margin-bottom: 200px;
     }
 
     .card-price {
@@ -477,7 +476,7 @@
     .kk {
         margin: auto;
         width: 80%;
-        margin-top: 200px;
+        margin-top: 70px;
     }
 
     .child-more {
@@ -486,6 +485,16 @@
         /* top: 0; */
         bottom: 30px;
         color: #fff;
+    }
+
+    .product-name {
+        display: inline-block;
+        margin-bottom: 0;
+        width: 250px;
+        /* Độ dài tối đa của tên sản phẩm */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 </style>
 
@@ -510,24 +519,34 @@
                         <a class="nav-link" href="/about">About</a>
                     </li>
                 </ul>
-
-                <% if (userLoggedIn) { %> <!-- Kiểm tra userLoggedIn bằng true -->
+                <div style="display: flex;">
+                    <% if (userLoggedIn) { %>
+                        <!-- Kiểm tra userLoggedIn bằng true -->
+                        <a href="/cart-product2" class="cart-icon">&#128722;</a>
+                        <div class="username">
+                            Xin chào <%= username %>.
+                        </div>
+                        <div class="actions">
+                            <a href="/logout" class="text-sm font-semibold leading-6 text-gray-900">Đăng xuất</a>
+                            <!-- Thêm mã HTML và CSS cho biểu tượng giỏ hàng -->
+                        </div>
+                </div>
+                <% } else { %>
                     <div>
-                      <%= username %> đã đăng nhập thành công.
-                      <a href="/logout" class="text-sm font-semibold leading-6 text-gray-900">Đăng xuất</a>
+                        <a href="/login" class="text-sm font-semibold leading-6 text-gray-900">
+                            Đăng nhập <span aria-hidden="true">&rarr;</span>
+                        </a>
                     </div>
-                  <% } else { %>
-                    <div>
-                      <a href="/login" class="text-sm font-semibold leading-6 text-gray-900">
-                        Đăng nhập <span aria-hidden="true">&rarr;</span>
-                      </a>
-                    </div>
-                  <% } %>
-                  
-                
-
+                    <% } %>
             </div>
-        </nav>
+
+
+
+
+
+
+    </div>
+    </nav>
     </div>
     <!--End banner-->
 
@@ -549,7 +568,7 @@
             <h3 class="category-product-header">Shop category</h1>
                 <div>
                     <a href="/login" className="text-sm font-semibold leading-6 text-gray-900">
-                        Log in <span aria-hidden="true">&rarr;</span>
+                        Xem tất cả <span aria-hidden="true">&rarr;</span>
                     </a>
                 </div>
         </div>
@@ -594,17 +613,18 @@
                 <div class="card" style="width: 18rem;">
                     <img src="<%= dataTable[i].imageSrc %>" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <a class="card-title" href="/detail-product?id=<%= dataTable[i].id %>">
+                        <a class="card-title product-name" href="/detail-product?id=<%= dataTable[i].id %>">
                             <%= dataTable[i].nameProduct %>
                         </a>
                         <p class="card-text">
                             <%= dataTable[i].Desc %>
                         </p>
                         <div class="wrapper-price">
-                            <p class="card-price">
+                            <p>Giá tiền :</p>
+                            <p class="card-price"> $
                                 <%= dataTable[i].price %>
                             </p>
-                            <a href="#" class="btn btn-primary">Thêm</a>
+
                         </div>
                     </div>
                 </div>
@@ -628,18 +648,17 @@
                 <div class="card" style="width: 18rem;">
                     <img src="<%= dataTable[i].imageSrc %>" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <a class="card-title" href="/detail-product?id=<%= dataTable[i].id %>">
+                        <a class="card-title product-name" href="/detail-product?id=<%= dataTable[i].id %>">
                             <%= dataTable[i].nameProduct %>
                         </a>
                         <p class="card-text">
                             <%= dataTable[i].Desc %>
                         </p>
                         <div class="wrapper-price">
+                            <p>Giá tiền :</p>
                             <p class="card-price">
                                 <%= dataTable[i].price %>
                             </p>
-                            <a href="/port-cart" method='POST' id="addToCartButton" class="btn btn-primary"
-                                type="button">Thêm</a>
                         </div>
                     </div>
                 </div>

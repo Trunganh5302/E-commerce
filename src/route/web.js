@@ -12,90 +12,101 @@ let app = express();
 
 // Đặt cấu hình cho session middleware
 router.use(
-    session({
-        secret: 'your-secret-key',
-        resave: false,
-        saveUninitialized: true
-    })
+  session({
+    secret: 'your-secret-key',
+    resave: false,
+    saveUninitialized: true
+  })
 );
 
 
 // Middleware kiểm tra đăng nhập
 const checkLoggedIn = (req, res, next) => {
-    if (!req.session.userId) {
-        // Chưa đăng nhập, chuyển hướng đến trang đăng nhập
-        console.log("chưa đăng nhập")
-        return res.redirect('/login');
-    }
-    console.log('đã đăng kí')
-    console.log(req.session.userId)
-    // Đã đăng nhập, tiếp tục xử lý yêu cầu
-    next();
+  if (!req.session.userId) {
+    // Chưa đăng nhập, chuyển hướng đến trang đăng nhập
+    console.log("chưa đăng nhập")
+    return res.redirect('/login');
+  }
+  console.log('đã đăng kí')
+  console.log(req.session.userId)
+  // Đã đăng nhập, tiếp tục xử lý yêu cầu
+  next();
 };
 
 
 
 let initWebRoutes = (app) => {
 
-    router.get('/', (req, res) => {
-        let userLoggedIn = false;
-        let username = "";
-      
-        if (req.session.userId) {
-          userLoggedIn = true;
-          username = req.session.username;
-          console.log(username)
-        }
-      
-        // Gọi hàm getCategory từ homeControler và truyền req, res nếu cần
-        homeControler.getCategory(req, res, (dataCategory, data) => {
-          return res.render('Homepage.ejs', {
-            userLoggedIn: userLoggedIn,
-            username: username,
-            data: JSON.stringify(data),
-            dataCate: dataCategory,
-            dataTable: data
-            // Các dữ liệu khác...
-          });
-        });
+  router.get('/', (req, res) => {
+    let userLoggedIn = false;
+    let username = "";
+
+    if (req.session.userId) {
+      userLoggedIn = true;
+      username = req.session.username;
+      console.log(username)
+    }
+
+    // Gọi hàm getCategory từ homeControler và truyền req, res nếu cần
+    homeControler.getCategory(req, res, (dataCategory, data) => {
+      return res.render('Homepage.ejs', {
+        userLoggedIn: userLoggedIn,
+        username: username,
+        data: JSON.stringify(data),
+        dataCate: dataCategory,
+        dataTable: data
+        // Các dữ liệu khác...
       });
-    
-    router.get('/shops', homeControler.getShop) // chưa làm
-    router.get('/about', homeControler.getAboutPage) // chưa làm
-    router.get('/news', homeControler.getAboutPage)  // chưa làm
-    router.get('/contacts', homeControler.getAboutPage)  // chưa làm
-
-    router.get('/detail-product', homeControler.getDetailProduct)
-
-    router.get('/cart-product2', checkLoggedIn, CartControl.ShowCart)
-    router.post('/port-cart', checkLoggedIn, CartControl.addToCart)
-    router.get('/delete-cartProduct', CartControl.deleteProductCart)
-
-
-    router.get('/crud', homeControler.getData)
-
-    // xử lí bên data
-    router.post('/post-crud', homeControler.postCRUD)
-    router.get('/get-crud', homeControler.getCRUD)
-    router.get('/edit-crud', homeControler.getEditCRUD)
-    router.post('/put-crud', homeControler.putCRUD)
-    router.get('/delete-crud', homeControler.deleteCRUD)
-        -
-
-        // api
-        router.get('/login', userControler.handleLogin)
-    router.get('/register', userControler.handleRegister)
-    router.get('/logout', userControler.logout) // chưa làm
-
-
-    router.post('/put-login', userControler.putLogin)
-
-
-    router.get('/', (req, res) => {
-        return res.send("Hello trung anh");
     });
+  });
 
-    return app.use("/", router)
+  router.get('/shops', homeControler.getShop) // chưa làm
+  router.get('/about', homeControler.getAboutPage) // chưa làm
+  router.get('/news', homeControler.getAboutPage)  // chưa làm
+  router.get('/contacts', homeControler.getAboutPage)  // chưa làm
+
+  router.get('/detail-product', homeControler.getDetailProduct)
+
+  router.get('/cart-product2', checkLoggedIn, CartControl.ShowCart)
+  // Router để kiểm tra trạng thái đăng nhập
+  router.post('/check-login', (req, res) => {
+    // Kiểm tra xem người dùng đã đăng nhập hay chưa
+    let loggedIn = req.session.userId ? true : false;
+
+    // Trả về kết quả dưới dạng JSON
+    res.json({ loggedIn });
+  });
+
+  // Router để thêm vào giỏ hàng
+  router.post('/port-cart', checkLoggedIn, CartControl.addToCart);
+
+  router.get('/delete-cartProduct', CartControl.deleteProductCart)
+
+
+  router.get('/crud', homeControler.getData)
+
+  // xử lí bên data
+  router.post('/post-crud', homeControler.postCRUD)
+  router.get('/get-crud', homeControler.getCRUD)
+  router.get('/edit-crud', homeControler.getEditCRUD)
+  router.post('/put-crud', homeControler.putCRUD)
+  router.get('/delete-crud', homeControler.deleteCRUD)
+    -
+
+    // api
+    router.get('/login', userControler.handleLogin)
+  router.get('/register', userControler.handleRegister)
+  router.get('/logout', userControler.logout) // chưa làm
+
+
+  router.post('/put-login', userControler.putLogin)
+
+
+  router.get('/', (req, res) => {
+    return res.send("Hello trung anh");
+  });
+
+  return app.use("/", router)
 }
 
 module.exports = initWebRoutes

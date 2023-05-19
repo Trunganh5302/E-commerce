@@ -79,7 +79,7 @@
   }
 
   .tab-content img {
-    width: 100%;
+    width: 70%;
     -webkit-animation-name: opacity;
     animation-name: opacity;
     -webkit-animation-duration: .3s;
@@ -264,9 +264,25 @@
         </ul>
 
         <div>
-          <a href="/login" className="text-sm font-semibold leading-6 text-gray-900">
-            Log in <span aria-hidden="true">&rarr;</span>
-          </a>
+          <div style="display: flex;">
+            <% if (userLoggedIn) { %>
+              <!-- Kiểm tra userLoggedIn bằng true -->
+              <a href="/cart-product2" class="cart-icon">&#128722;</a>
+              <div class="username">
+                Xin chào <%= username %>.
+              </div>
+              <div class="actions">
+                <a href="/logout" class="text-sm font-semibold leading-6 text-gray-900">Đăng xuất</a>
+                <!-- Thêm mã HTML và CSS cho biểu tượng giỏ hàng -->
+              </div>
+          </div>
+          <% } else { %>
+            <div>
+              <a href="/login" class="text-sm font-semibold leading-6 text-gray-900">
+                Đăng nhập <span aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
+            <% } %>
         </div>
       </div>
     </nav>
@@ -314,65 +330,87 @@
             </h5>
 
             <div class="action">
-              <a href="/port-cart" method='POST' id="addToCartButton" class="add-to-cart btn btn-default"
-                type="button">Thêm vào giỏ hàng</a>
+              <a href="#" id="addToCartButton" class="add-to-cart btn btn-default" type="button">Thêm vào giỏ hàng</a>
             </div>
-            <span class="idProduct" hidden><%= product.id %></span>
-            <span class="idCate" hidden><%= product.categoryID %></span>
+
+            <span class="idProduct" hidden>
+              <%= product.id %>
+            </span>
+            <span class="idCate" hidden>
+              <%= product.categoryID %>
+            </span>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-
 </body>
 <script>
   // Bắt sự kiện click trên thẻ <a>
-  
-  document.querySelector('.add-to-cart').addEventListener('click', function (event) {
-    event.preventDefault(); // Ngăn chặn hành vi mặc định của thẻ <a>
 
-    // Lấy thông tin từ trang HTML
-    let userID = 1;
-    let productID = 1;
-    let imageSrc = document.querySelector('#pic-1 img').getAttribute('src');
-    let idCategory = document.querySelector('.idCate').textContent;
-    let nameProduct = document.querySelector('.product-title').textContent;
-    let Price = document.querySelector('.price span').textContent;
-    let Quantity = 2
-    
-    
+    document.querySelector('.add-to-cart').addEventListener('click', function (event) {
+  event.preventDefault(); // Ngăn chặn hành vi mặc định của thẻ <a>
 
-    // Gửi yêu cầu đến server
-    fetch('/port-cart', {
-      method: 'POST',
-      body: JSON.stringify({
-        userID:userID,
-        productID:productID,
-        imageSrc:imageSrc,
-        idCategory:idCategory,
-        nameProduct: nameProduct,
-        Price: Price,
-        Quantity:Quantity
-      }),
-      headers: {
-        'Content-Type': 'application/json'
+  // Kiểm tra trạng thái đăng nhập
+  fetch('/check-login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(response => response.json())
+    .then(data => {
+      if (data.loggedIn) {
+        // Đã đăng nhập, tiếp tục xử lý thêm vào giỏ hàng
+        // Lấy thông tin từ trang HTML
+        let userID = 1;
+        let productID = 1;
+        let imageSrc = document.querySelector('#pic-1 img').getAttribute('src');
+        let idCategory = document.querySelector('.idCate').textContent;
+        let nameProduct = document.querySelector('.product-title').textContent;
+        let Price = document.querySelector('.price span').textContent;
+        let Quantity = 2;
+
+        // Gửi yêu cầu đến server
+        fetch('/port-cart', {
+          method: 'POST',
+          body: JSON.stringify({
+            userID: userID,
+            productID: productID,
+            imageSrc: imageSrc,
+            idCategory: idCategory,
+            nameProduct: nameProduct,
+            Price: Price,
+            Quantity: Quantity
+          }),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+          .then(response => response.json())
+          .then(data => {
+            console.log(data); // Log kết quả từ server
+            alert("Thêm thành công");
+            window.location.href = '/cart-product2';
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+      } else {
+        // Chưa đăng nhập, hiển thị thông báo yêu cầu đăng nhập
+        alert('Vui lòng đăng nhập trước khi thêm vào giỏ hàng');
       }
     })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data); // Log kết quả từ server
-        alert("Thêm thành công")
-        window.location.href='/cart-product2'
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-  });
+    .catch(error => {
+      console.error('Error:', error);
+    });
+});
+
+
 
 </script>
 
-</script> 
+</script>
 
 </html>

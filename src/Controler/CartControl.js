@@ -11,13 +11,20 @@ let ShowCart = async (req,res) => {
     })
 }
 
-let addToCart = async (req,res) => {
-    console.log("đã vào ")
-    console.log(req.body)
-    let message = await CRUDBill.createNewCart(req.body)
-    console.log(message)
-    return res.send('CartProduct.ejs')
-}
+let addToCart = async (req, res) => {
+    console.log("đã vào ");
+    console.log(req.body);
+    let message = await CRUDBill.createNewCart(req.body);
+    console.log(message);
+    
+    // Kiểm tra xem yêu cầu thêm vào giỏ hàng thành công hay không
+    if (message === "Thêm thành công") {
+      return res.render('CartProduct.ejs', { successMessage: message });
+    } else {
+      return res.send('From edit page');
+    }
+  }
+  
 
 let deleteProductCart = async (req,res) =>{
     let cartID =  req.query.id;

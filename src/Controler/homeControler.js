@@ -41,11 +41,26 @@ let getAboutPage = (req, res) => {
 let getShop = async (req, res) => {
     let dataCategory = await CRUDCategory.getAllCategory()
     let data = await CRUDProduct.getAllProduct()
+
+    let userLoggedIn = req.session.userLoggedIn;
+    let userId = req.session.userId;
+    let username = req.session.username;
+
+    if(userId){
+        userLoggedIn = true
+    }
+
+    console.log(userLoggedIn, userId, username)
+
     return res.render('shop.ejs', {
         dataCate: dataCategory,
-        dataTable: data
+        dataTable: data,
+        userLoggedIn,
+        username
     })
 }
+
+
 
 let getData = (req, res) => {
     return res.render('test/crud.ejs')
@@ -82,16 +97,31 @@ let getEditCRUD = async (req, res) => {
 }
 
 let getDetailProduct = async (req, res) => {
+    let userLoggedIn = req.session.userLoggedIn;
+    let userId = req.session.userId;
+    let username = req.session.username;
     let ProductID = req.query.id;
+
+    if (userId) {
+        userLoggedIn = true;
+    }
+
+    console.log(userLoggedIn, userId, username);
+
     if (ProductID) {
         let ProductData = await CRUDProduct.getProductbyID(ProductID);
+        console.log(req.session); // In toàn bộ dữ liệu trong session
+        console.log("chúng tôi đang xem dữ liệu trong sesion khi chuyển hướng tới detailProduct")
         return res.render('detailProduct.ejs', {
-            product: ProductData // gán dữ liệu của ProoductData vào trong biến product để truyền ra view
-        })
+            product: ProductData,
+            userLoggedIn,
+            username
+        });
     } else {
-        return res.send('From edit page')
+        return res.send('From edit page');
     }
-}
+};
+
 
 let putCRUD = async (req, res) => {
     let data = req.body // lấy tất cả input 
@@ -133,7 +163,7 @@ let getCategory = async (req, res, callback) => {
       userLoggedIn = true;
       username = req.session.username;
 
-      console.log(username,req.session.userId)
+      console.log('Chúng tôi đứng từ homeControler', username,req.session.userId)
     }
   
     // Gọi callback function và truyền dữ liệu cần truyền vào
