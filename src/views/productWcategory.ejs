@@ -462,10 +462,6 @@
 
     }
 
-    .layout_product {
-        margin-left: 35px;
-    }
-
     /* // */
     .wrapper-information {
         display: flex;
@@ -493,7 +489,7 @@
 
 
     .mt-100 {
-        width: 150%;
+        width: 35.5%;
         margin-top: 70px;
     }
 
@@ -640,6 +636,9 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
+    .layout_product{
+        margin-left: 35px;
+    }
 </style>
 
 <body>
@@ -725,12 +724,10 @@
                                 <div class="card-body">
 
                                     <ul class="list-menu">
-                                        <% for (let i=0; i < 4; i++) { %>
-                                            <li><a href="/category?categorytID=<%= dataCategory[i].id %>"
-                                                    data-abc="true">
-                                                    <%= dataCategory[i].nameCategory %>
-                                                </a></li>
-                                            <% } %>
+                                        <li><a href="#" data-abc="true">Áo thun </a></li>
+                                        <li><a href="#" data-abc="true">Quần </a></li>
+                                        <li><a href="#" data-abc="true">Giày </a></li>
+                                        <li><a href="#" data-abc="true">Ván trượt </a></li>
                                     </ul>
 
                                 </div>
@@ -812,13 +809,15 @@
             </div>
         </div>
 
-        <div class="layout_product">
+        <div class="layout_product"> 
             <div class="pane">
-                <h1 class="category-product-header" style="margin-top: 75px;">Tất cả sản phẩm</h1>
-
+                <% if (DataCate) { %>
+                    <h1 class="category-product-header" style="margin-top: 75px;"><%= DataCate.nameCategory %></h1>
+                <% } else { %>
+                    <h1 class="category-product-header" style="margin-top: 75px;">Tất cả sản phẩm</h1>
+                <% } %>
             </div>
-
-
+            
 
             <div class="wrapper-card">
                 <% for(let i=0; i < dataTable.length; i++) { %>

@@ -372,6 +372,7 @@
     }
 
     .card.cate1 {
+        height: 270px;
         border-radius: 0.25rem;
         overflow: hidden;
         position: relative;
@@ -388,7 +389,7 @@
     .text-center {
         color: aliceblue;
         right: 0;
-        top: 0;
+        top: 165px;
         position: absolute;
         font-size: x-large;
         font-family: math;
@@ -397,7 +398,7 @@
         justify-content: center;
         align-items: center;
         left: 0;
-        bottom: 73%;
+        bottom: 0;
         font-weight: bolder;
     }
 
@@ -522,7 +523,8 @@
                 <div style="display: flex;">
                     <% if (userLoggedIn) { %>
                         <!-- Kiểm tra userLoggedIn bằng true -->
-                        <a href="/cart-product2" class="cart-icon">&#128722;</a>
+                        <a href="/cart-product2" class="cart-icon">&#128722;<span class="item-count"><%= dataTable.length %></span></a>
+
                         <div class="username">
                             Xin chào <%= username %>.
                         </div>
@@ -567,7 +569,7 @@
         <div class="more-cate">
             <h3 class="category-product-header">Shop category</h1>
                 <div>
-                    <a href="/login" className="text-sm font-semibold leading-6 text-gray-900">
+                    <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
                         Xem tất cả <span aria-hidden="true">&rarr;</span>
                     </a>
                 </div>
@@ -634,7 +636,7 @@
         <div class="pane">
             <h1 class="category-product-header" style="margin-top: 75px;">Quần</h1>
             <div class="more">
-                <a href="/login" className="text-sm font-semibold leading-6 text-gray-900">
+                <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
                     Xem tất cả <span aria-hidden="true">&rarr;</span>
                 </a>
             </div>

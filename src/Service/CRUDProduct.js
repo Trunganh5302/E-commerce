@@ -1,5 +1,6 @@
-import { resolveInclude } from 'ejs'
+import { name, resolveInclude } from 'ejs'
 import db from '/CODE/Linh tinh/Example/BackendEcommerce/models/index'
+import { raw } from 'body-parser'
 
 let createNewProduct = (data) => {
     return new Promise(async(resolve, reject) =>{
@@ -53,6 +54,48 @@ let getProductbyID = (ProductId) => {
     })
 }
 
+let getProductByCategory = (categoryID) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let product = await db.Products.findAll({
+          where: { categoryID: categoryID },
+          raw: true
+        });
+  
+        console.log(product);
+
+        if (product) {
+          resolve(product);
+        } else {
+          resolve({});
+        }
+      } catch (error) {
+        reject(error);
+      }
+    });
+  };
+
+let getNameCate = (categoryID) => {
+    return new Promise(async (resolve, reject) =>{
+        try {
+            let namecategory = await db.Categorys.findOne({
+                where: {id: categoryID},
+                raw: true
+            })
+            console.log("Chúng tôi kiểm tra tên danh mục", namecategory.nameCategory)
+            if (namecategory) {
+                resolve(namecategory);
+              } else {
+                resolve({});
+              }
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
+  
+
 let updateProduct = (data) =>{
     return new  Promise(async(resolve, reject) => {
         try {
@@ -105,4 +148,6 @@ module.exports = {
     getProductbyID:getProductbyID,
     updateProduct: updateProduct,
     deleteProductbyId: deleteProductbyId,
+    getProductByCategory:getProductByCategory,
+    getNameCate:getNameCate
 }

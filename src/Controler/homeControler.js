@@ -41,6 +41,7 @@ let getAboutPage = (req, res) => {
 let getShop = async (req, res) => {
     let dataCategory = await CRUDCategory.getAllCategory()
     let data = await CRUDProduct.getAllProduct()
+    console.log("Dữ liệu đang lấy ở Category")
 
     let userLoggedIn = req.session.userLoggedIn;
     let userId = req.session.userId;
@@ -53,7 +54,7 @@ let getShop = async (req, res) => {
     console.log(userLoggedIn, userId, username)
 
     return res.render('shop.ejs', {
-        dataCate: dataCategory,
+        dataCategory: dataCategory,
         dataTable: data,
         userLoggedIn,
         username
@@ -97,10 +98,13 @@ let getEditCRUD = async (req, res) => {
 }
 
 let getDetailProduct = async (req, res) => {
+
     let userLoggedIn = req.session.userLoggedIn;
     let userId = req.session.userId;
     let username = req.session.username;
     let ProductID = req.query.id;
+
+    console.log("ID của product là : " , ProductID)
 
     if (userId) {
         userLoggedIn = true;
@@ -170,6 +174,44 @@ let getCategory = async (req, res, callback) => {
     callback(dataCategory, data);
   }
 
+  let getProductByCategory = async (req, res) => {
+    let userLoggedIn = req.session.userLoggedIn;
+    let userId = req.session.userId;
+    let username = req.session.username;
+    let categoryID = req.query.categorytID; // Sử dụng tên key chính xác từ query parameters
+  
+    console.log("category tôi đang kiểm tra", categoryID);
+  
+    if (userId) {
+      userLoggedIn = true;
+    }
+  
+    console.log(userLoggedIn, userId, username);
+  
+    if (categoryID) {
+      try {
+        let ProductData = await CRUDProduct.getProductByCategory(categoryID);
+        let NameCate = await CRUDProduct.getNameCate(categoryID)
+
+        console.log(NameCate , "Đây là tên mà chúng tôi muốn========================================")
+
+        console.log(req.session); // In toàn bộ dữ liệu trong session
+        console.log("chúng tôi đang xem dữ liệu trong sesion khi chuyển hướng tới detailProduct");
+        return res.render('productWcategory.ejs', {
+          DataCate: NameCate,
+          dataTable: ProductData,
+          userLoggedIn,
+          username
+        });
+      } catch (error) {
+        return res.send('Error: ' + error.message);
+      }
+    } else {
+      return res.send('From edit page');
+    }
+  };
+  
+
 
 module.exports = {
     getHomePage: getHomePage,
@@ -183,5 +225,6 @@ module.exports = {
     getProduct: getProduct,
     getCategory: getCategory,
     getShop: getShop,
-    getDetailProduct: getDetailProduct
+    getDetailProduct: getDetailProduct,
+    getProductByCategory: getProductByCategory
 }
