@@ -6,7 +6,7 @@ module.exports = {
         // Customer_id: DataTypes.INTEGER,
         // Shipping_date: DataTypes.INTEGER,
         // is_delivered: DataTypes.INTEGER
-      id: {
+        id : {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,

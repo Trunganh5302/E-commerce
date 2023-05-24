@@ -2,6 +2,7 @@ import { json } from 'body-parser';
 import db from '/CODE/Linh tinh/Example/BackendEcommerce/models/index'
 import CRUDProduct from '../Service/CRUDProduct';
 import CRUDCategory from '../Service/CRUDCategory'
+import CRUDBill from '../Service/CRUDBill'
 
 
 let getHomePage = async (req, res) => {
@@ -159,14 +160,16 @@ let getProduct = async (req, res) => {
 let getCategory = async (req, res, callback) => {
     let userLoggedIn = false;
     let username = req.query.UseName || "";
+    let userId = req.session.userId;
+    console.log(userId,"userID được lấy thừ getCategory")
   
     let dataCategory = await CRUDCategory.getAllCategory();
     let data = await CRUDProduct.getAllProduct();
+    
   
     if (req.session.userId) {
       userLoggedIn = true;
       username = req.session.username;
-
       console.log('Chúng tôi đứng từ homeControler', username,req.session.userId)
     }
   
@@ -192,6 +195,7 @@ let getCategory = async (req, res, callback) => {
       try {
         let ProductData = await CRUDProduct.getProductByCategory(categoryID);
         let NameCate = await CRUDProduct.getNameCate(categoryID)
+        let dataCategory = await CRUDCategory.getAllCategory()
 
         console.log(NameCate , "Đây là tên mà chúng tôi muốn========================================")
 
@@ -201,7 +205,8 @@ let getCategory = async (req, res, callback) => {
           DataCate: NameCate,
           dataTable: ProductData,
           userLoggedIn,
-          username
+          username,
+          dataCategory:dataCategory
         });
       } catch (error) {
         return res.send('Error: ' + error.message);

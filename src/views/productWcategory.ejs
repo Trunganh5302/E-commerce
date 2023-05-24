@@ -724,10 +724,12 @@
                                 <div class="card-body">
 
                                     <ul class="list-menu">
-                                        <li><a href="#" data-abc="true">Áo thun </a></li>
-                                        <li><a href="#" data-abc="true">Quần </a></li>
-                                        <li><a href="#" data-abc="true">Giày </a></li>
-                                        <li><a href="#" data-abc="true">Ván trượt </a></li>
+                                        <% for (let i=0; i < 4; i++) { %>
+                                            <li><a href="/category?categorytID=<%= dataCategory[i].id %>"
+                                                    data-abc="true">
+                                                    <%= dataCategory[i].nameCategory %>
+                                                </a></li>
+                                            <% } %>
                                     </ul>
 
                                 </div>

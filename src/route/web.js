@@ -54,7 +54,7 @@ let initWebRoutes = (app) => {
         username: username,
         data: JSON.stringify(data),
         dataCate: dataCategory,
-        dataTable: data
+        dataTable: data,
         // Các dữ liệu khác...
       });
     });
@@ -75,13 +75,16 @@ let initWebRoutes = (app) => {
   router.post('/check-login', (req, res) => {
     // Kiểm tra xem người dùng đã đăng nhập hay chưa
     let loggedIn = req.session.userId ? true : false;
+    let user = req.session.userId;
+    console.log("đã đăng nhập: ", req.session.userId)
 
     // Trả về kết quả dưới dạng JSON
-    res.json({ loggedIn });
+    res.json({ loggedIn, user });
   });
 
   // Router để thêm vào giỏ hàng
   router.post('/port-cart', checkLoggedIn, CartControl.addToCart);
+  router.post('/port-bill', checkLoggedIn, CartControl.addToBill);
 
   router.get('/delete-cartProduct', CartControl.deleteProductCart)
 
@@ -97,12 +100,13 @@ let initWebRoutes = (app) => {
     -
 
     // api
-    router.get('/login', userControler.handleLogin)
+  router.get('/login', userControler.handleLogin)
   router.get('/register', userControler.handleRegister)
-  router.get('/logout', userControler.logout) // chưa làm
+  router.get('/logout', userControler.logout) 
 
 
   router.post('/put-login', userControler.putLogin)
+  // router.post('/put-register', userControler.putRegister)
 
 
   router.get('/', (req, res) => {

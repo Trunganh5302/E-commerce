@@ -13,6 +13,22 @@ let getAllUser = () => {
     })
 }
 
+let createUser = (data) => {
+    return new Promise(async(resolve, reject) => {
+        try {
+            await db.Users.create({
+                UseName: data.name,
+                passWord: data.imageSrc,
+            })
+
+            resolve("Oke create a new user");
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
 module.exports = {
-    getAllUser:getAllUser
+    getAllUser:getAllUser,
+    createUser:createUser
 }

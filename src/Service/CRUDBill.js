@@ -1,20 +1,35 @@
 import db from '/CODE/Linh tinh/Example/BackendEcommerce/models/index'
 
-let getAllCart = () => {
-    return new Promise(async(resolve, reject) => {
-        try{
-            let cart = db.Carts.findAll({
-            });
-            console.log(cart)
-            resolve(cart); // thoát khỏi 1 promise
-        }catch(e){
-            reject(e)
-        }
-    })
-}
+let getAllCart = (userID) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let cart = await db.Carts.findAll({
+          where: {
+            userID: userID
+          }
+        });
+        resolve(cart);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  };
+  
 
-let createNewCart = (data,userID, productID) => {
-    return new Promise(async(resolve, reject) =>{
+let DelAllCart = () => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        await db.Carts.destroy({ where: {} }); // Xóa tất cả các sản phẩm trong bảng Carts
+        resolve("Xóa thành công");
+      } catch (error) {
+        reject(error);
+      }
+    });
+  };
+  
+
+let createNewCart = (data, userID, productID) => {
+    return new Promise(async (resolve, reject) => {
         try {
             await db.Carts.create({
                 userID: userID,
@@ -23,7 +38,7 @@ let createNewCart = (data,userID, productID) => {
                 idCategory: data.idCategory,
                 NameCategory: data.nameCategory,
                 nameProduct: data.nameProduct,
-                Price: data.Price,  
+                Price: data.Price,
                 Quantity: 1,
             })
             resolve("Oke create a new product");
@@ -31,16 +46,32 @@ let createNewCart = (data,userID, productID) => {
             reject(error)
         }
     })
-      
+
+}
+
+let createNewBill = (data, userID) => {
+    return new Promise(async (resolve, reject) => {
+        console.log("UserID trong createNewBill", data)
+        try {
+            await db.Bills.create({
+                UserID: userID,
+                Quantity: data.Quantity,
+                Total: data.Total
+            })
+            resolve("Oke create a new bill");
+        } catch (error) {
+            reject(error)
+        }
+    })
 }
 
 
 
 let deleteCartbyId = (CartID) => {
-    return new Promise(async(resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
         try {
             let cart = await db.Carts.findOne({
-                where: {id: CartID}
+                where: { id: CartID }
             })
 
             if (cart) {
@@ -54,7 +85,9 @@ let deleteCartbyId = (CartID) => {
 }
 
 module.exports = {
-    getAllCart:getAllCart,
-    createNewCart:createNewCart,
-    deleteCartbyId:deleteCartbyId
+    getAllCart: getAllCart,
+    createNewCart: createNewCart,
+    deleteCartbyId: deleteCartbyId,
+    createNewBill: createNewBill,
+    DelAllCart:DelAllCart
 }

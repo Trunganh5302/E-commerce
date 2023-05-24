@@ -213,25 +213,25 @@
 
                 <div>
                     <div style="display: flex;">
-                      <% if (userLoggedIn) { %>
-                        <!-- Kiểm tra userLoggedIn bằng true -->
-                        <a href="/cart-product2" class="cart-icon">&#128722;</a>
-                        <div class="username">
-                          Xin chào <%= username %>.
-                        </div>
-                        <div class="actions">
-                          <a href="/logout" class="text-sm font-semibold leading-6 text-gray-900">Đăng xuất</a>
-                          <!-- Thêm mã HTML và CSS cho biểu tượng giỏ hàng -->
-                        </div>
+                        <% if (userLoggedIn) { %>
+                            <!-- Kiểm tra userLoggedIn bằng true -->
+                            <a href="/cart-product2" class="cart-icon">&#128722;<span class="item-count"><%= dataTable.length %></span></a>
+                            <div class="username">
+                                Xin chào <%= username %>.
+                            </div>
+                            <div class="actions">
+                                <a href="/logout" class="text-sm font-semibold leading-6 text-gray-900">Đăng xuất</a>
+                                <!-- Thêm mã HTML và CSS cho biểu tượng giỏ hàng -->
+                            </div>
                     </div>
                     <% } else { %>
-                      <div>
-                        <a href="/login" class="text-sm font-semibold leading-6 text-gray-900">
-                          Đăng nhập <span aria-hidden="true">&rarr;</span>
-                        </a>
-                      </div>
-                      <% } %>
-                  </div>
+                        <div>
+                            <a href="/login" class="text-sm font-semibold leading-6 text-gray-900">
+                                Đăng nhập <span aria-hidden="true">&rarr;</span>
+                            </a>
+                        </div>
+                        <% } %>
+                </div>
             </div>
         </nav>
     </div>
@@ -246,7 +246,7 @@
                             <h4><b>Shopping Cart</b></h4>
                         </div>
 
-                        <div class="col align-self-center text-right text-muted">
+                        <div class="col align-self-center text-right text-muted" id="numProduct">
                             <%= dataTable.length %> sản phẩm
                         </div>
 
@@ -266,9 +266,9 @@
                                 <div class="row">Cotton T-shirt</div>
                             </div>
                             <div class="col">
-                                <a  id="decrease" style="cursor: pointer;">-</a>
-                                <a  id="value" class="border">1</a>
-                                <a  id="increase" style="cursor: pointer;">+</a>
+                                <a id="decrease" style="cursor: pointer;">-</a>
+                                <a id="value" class="border">1</a>
+                                <a id="increase" style="cursor: pointer;">+</a>
                             </div>
                             <div class="col">&euro; <%= dataTable[i].Price %><a
                                         href="/delete-cartProduct?id=<%= dataTable[i].id %>" class="close">&#10005;</a>
@@ -294,16 +294,19 @@
                         <% for(let i=0; i < dataTable.length; i++) { %>
                             <% total +=dataTable[i].Price; %>
                                 <% } %>
-                                    <div id="productPrice" class="col text-right">&euro; <%= total %>
+                                    <div id="productPrice" class="col text-right"> <%= total %>
                                     </div>
                 </div>
                 <form>
                     <p>Hình thức thanh toán</p>
-                    <select>
-                        <option class="text-muted">Thanh toán khi nhận hàng</option>
-                        <option class="text-muted">Thanh toán qua thẻ ngân hàng</option>
-                    </select>
-
+                    <div class="hehe" style="    background: white;
+                    display: flex;
+                    padding: 10px;
+                    border-radius: 4px;">
+                        <input type="checkbox" id="paymentOption" checked style="margin: 0;
+                        width: 6%;">
+                        <label style="margin: 0 0 0 20px;" for="paymentOption">Thanh toán khi nhận hàng</label>
+                    </div>
                 </form>
                 <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                     <div class="col">Tổng tiền</div>
@@ -317,26 +320,58 @@
     </div>
 </body>
 <script>
-    const decreaseButton = document.getElementById('decrease');
-    const valueElement = document.getElementById('value');
-    const increaseButton = document.getElementById('increase');
-    const totalElement = document.getElementById('total');
-    const productPriceElement = document.getElementById('productPrice');
 
-    let value = parseInt(valueElement.textContent);
+document.querySelector('.btn').addEventListener('click', function (event) {
+  event.preventDefault(); // Ngăn chặn hành vi mặc định của thẻ <button>
 
-    decreaseButton.addEventListener('click', () => {
-        if (value > 1) {
-            value--;
-            valueElement.textContent = value.toString();
-            console.log("tăng")
-        }
+  // Kiểm tra trạng thái đăng nhập
+  fetch('/check-login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(response => response.json())
+    .then(data => {
+      if (data.loggedIn) {
+        // Đã đăng nhập, tiếp tục xử lý tạo hóa đơn
+        // Lấy thông tin từ trang HTML
+        let userID = data.userID; // Thay đổi userID theo nhu cầu của bạn
+        let Quantity = document.querySelector('#numProduct').textContent;
+        let Total = document.querySelector('#productPrice').textContent;
+        console.log(Total)
+
+        // Gửi yêu cầu đến server
+        fetch('/port-bill', {
+          method: 'POST',
+          body: JSON.stringify({
+            userID: userID,
+            Quantity:Quantity,
+            Total:Total
+          }),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+          .then(response => response.json())
+          .then(data => {
+            console.log("hehehehehhhhhhhhhhhhhhhhhhh: ",data); // Log kết quả từ server
+            alert("Đơn hàng của bạn sẽ được chuyển tới trong vòng 2 ngày nữa");
+            // Thực hiện các hành động khác sau khi tạo hóa đơn thành công
+            window.location.href = '/';
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+      } else {
+        // Chưa đăng nhập, hiển thị thông báo yêu cầu đăng nhập
+        alert('Vui lòng đăng nhập trước khi thanh toán');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
     });
-
-    increaseButton.addEventListener('click', () => {
-        value++;
-        valueElement.textContent = value.toString();
-    });
+});
 
 
 

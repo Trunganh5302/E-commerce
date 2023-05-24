@@ -352,65 +352,65 @@
 <script>
   // Bắt sự kiện click trên thẻ <a>
 
-    document.querySelector('.add-to-cart').addEventListener('click', function (event) {
-  event.preventDefault(); // Ngăn chặn hành vi mặc định của thẻ <a>
+  document.querySelector('.add-to-cart').addEventListener('click', function (event) {
+    event.preventDefault(); // Ngăn chặn hành vi mặc định của thẻ <a>
 
-  // Kiểm tra trạng thái đăng nhập
-  fetch('/check-login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-    .then(response => response.json())
-    .then(data => {
-      if (data.loggedIn) {
-        // Đã đăng nhập, tiếp tục xử lý thêm vào giỏ hàng
-        // Lấy thông tin từ trang HTML
-        let userID = 1;
-        let productID = document.querySelector('.idProduct').textContent;
-        let imageSrc = document.querySelector('#pic-1 img').getAttribute('src');
-        let idCategory = document.querySelector('.idCate').textContent;
-        let nameCategory = document.querySelector('.NameCate').textContent;
-        let nameProduct = document.querySelector('.product-title').textContent;
-        let Price = document.querySelector('.price span').textContent;
-        let Quantity = 1;
-
-        // Gửi yêu cầu đến server
-        fetch('/port-cart', {
-          method: 'POST',
-          body: JSON.stringify({
-            userID: userID,
-            productID: productID,
-            imageSrc: imageSrc,
-            idCategory: idCategory,
-            nameCategory: nameCategory,
-            nameProduct: nameProduct,
-            Price: Price,
-            Quantity: Quantity
-          }),
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        })
-          .then(response => response.json())
-          .then(data => {
-            console.log(data); // Log kết quả từ server
-            alert("Thêm thành công");
-            window.location.href = '/cart-product2';
-          })
-          .catch(error => {
-            console.error('Error:', error);
-          });
-      } else {
-        // Chưa đăng nhập, hiển thị thông báo yêu cầu đăng nhập
-        alert('Vui lòng đăng nhập trước khi thêm vào giỏ hàng');
+    // Kiểm tra trạng thái đăng nhập
+    fetch('/check-login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
       }
     })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-});
+      .then(response => response.json())
+      .then(data => {
+        if (data.loggedIn) {
+          // Đã đăng nhập, tiếp tục xử lý thêm vào giỏ hàng
+          // Lấy thông tin từ trang HTML
+          let userID = 1;
+          let productID = document.querySelector('.idProduct').textContent;
+          let imageSrc = document.querySelector('#pic-1 img').getAttribute('src');
+          let idCategory = document.querySelector('.idCate').textContent;
+          let nameCategory = document.querySelector('.NameCate').textContent;
+          let nameProduct = document.querySelector('.product-title').textContent;
+          let Price = document.querySelector('.price span').textContent;
+          let Quantity = 1;
+
+          // Gửi yêu cầu đến server
+          fetch('/port-cart', {
+            method: 'POST',
+            body: JSON.stringify({
+              userID: userID,
+              productID: productID,
+              imageSrc: imageSrc,
+              idCategory: idCategory,
+              nameCategory: nameCategory,
+              nameProduct: nameProduct,
+              Price: Price,
+              Quantity: Quantity
+            }),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+            .then(response => response.json())
+            .then(data => {
+              console.log(data); // Log kết quả từ server
+              alert("Thêm thành công");
+              window.location.href = '/cart-product2';
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            });
+        } else {
+          // Chưa đăng nhập, hiển thị thông báo yêu cầu đăng nhập
+          alert('Vui lòng đăng nhập trước khi thêm vào giỏ hàng');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  });
 
 
 
