@@ -28,6 +28,9 @@ module.exports = {
       categoryID: {
         type: Sequelize.INTEGER
       },
+      nameCategory: {
+        type: Sequelize.STRING
+      },
       inventorID: {
         type: Sequelize.INTEGER
       },

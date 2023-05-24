@@ -13,18 +13,18 @@ let getAllCart = () => {
     })
 }
 
-let createNewCart = (data) => {
+let createNewCart = (data,userID, productID) => {
     return new Promise(async(resolve, reject) =>{
         try {
             await db.Carts.create({
-                userID: 1,
-                productID: 1,
+                userID: userID,
+                productID: productID,
                 imageSrc: data.imageSrc,
                 idCategory: data.idCategory,
-                NameCategory: "Áo nhà NIKE",
+                NameCategory: data.nameCategory,
                 nameProduct: data.nameProduct,
-                Price: data.Price,
-                Quantity: 2,
+                Price: data.Price,  
+                Quantity: 1,
             })
             resolve("Oke create a new product");
         } catch (error) {
@@ -33,6 +33,8 @@ let createNewCart = (data) => {
     })
       
 }
+
+
 
 let deleteCartbyId = (CartID) => {
     return new Promise(async(resolve, reject) => {

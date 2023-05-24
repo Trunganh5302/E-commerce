@@ -339,6 +339,9 @@
             <span class="idCate" hidden>
               <%= product.categoryID %>
             </span>
+            <span class="NameCate" hidden>
+              <%= product.nameCategory %>
+            </span>
           </div>
         </div>
       </div>
@@ -365,12 +368,13 @@
         // Đã đăng nhập, tiếp tục xử lý thêm vào giỏ hàng
         // Lấy thông tin từ trang HTML
         let userID = 1;
-        let productID = 1;
+        let productID = document.querySelector('.idProduct').textContent;
         let imageSrc = document.querySelector('#pic-1 img').getAttribute('src');
         let idCategory = document.querySelector('.idCate').textContent;
+        let nameCategory = document.querySelector('.NameCate').textContent;
         let nameProduct = document.querySelector('.product-title').textContent;
         let Price = document.querySelector('.price span').textContent;
-        let Quantity = 2;
+        let Quantity = 1;
 
         // Gửi yêu cầu đến server
         fetch('/port-cart', {
@@ -380,6 +384,7 @@
             productID: productID,
             imageSrc: imageSrc,
             idCategory: idCategory,
+            nameCategory: nameCategory,
             nameProduct: nameProduct,
             Price: Price,
             Quantity: Quantity

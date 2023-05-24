@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     imageSrc:DataTypes.STRING,
     price: DataTypes.INTEGER,
     categoryID: DataTypes.INTEGER,
-    // nameCategory: DataTypes.STIRNG,
+    nameCategory: DataTypes.STRING,
     inventorID: DataTypes.INTEGER
 
   }, {
