@@ -523,25 +523,26 @@
 
                 <div class="dropdown">
                     <% if (userLoggedIn) { %>
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <%= username %>
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2" style="right: 0; left: auto;">
-                        <% if (username === 'Chubinbmt02') { %>
-                            <a href="/admin" class="dropdown-item" type="button">Trang quản lí</a>
-                        <% } %>
-
-                      <a class="dropdown-item" type="button">Profile</a>
-                      <a href="/logout" class="dropdown-item" type="button">Đăng xuất</a>
-                    </div>
-                  </div>
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <%= username %>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2" style="right: 0; left: auto;">
+                            <% if (username==='Chubinbmt02' ) { %>
+                                <a href="/admin" class="dropdown-item" type="button">Trang quản lí</a>
+                                <% } %>
+                                    <a href="/cart-product2" class="dropdown-item" type="button">Giỏ hàng</a>
+                                    <a class="dropdown-item" type="button">Profile</a>
+                                    <a href="/logout" class="dropdown-item" type="button">Đăng xuất</a>
+                        </div>
+                </div>
                 <% } else { %>
                     <div>
                         <a href="/login" class="text-sm font-semibold leading-6 text-gray-900">
                             Đăng nhập <span aria-hidden="true">&rarr;</span>
                         </a>
                     </div>
-                <% } %>
+                    <% } %>
             </div>
 
 
