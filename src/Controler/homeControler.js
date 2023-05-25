@@ -3,6 +3,7 @@ import db from '/CODE/Linh tinh/Example/BackendEcommerce/models/index'
 import CRUDProduct from '../Service/CRUDProduct';
 import CRUDCategory from '../Service/CRUDCategory'
 import CRUDBill from '../Service/CRUDBill'
+import CRUDuser from '../Service/CRUDuser'
 
 
 let getHomePage = async (req, res) => {
@@ -89,14 +90,24 @@ let getCRUD = async (req, res) => { // test thử get ra hết tất cả các s
 let postNewCategory = async (req, res) => {
     let data = req.body;
     console.log("Tôi đang lấy dữ liệu từ form tạo mới danh mục")
-    console.log(data)
     let message = await CRUDCategory.createNewCategory(req.body)
-    console.log(message)
     return res.redirect("/admin/cateAdmin");
+}
+
+let postNewUser = async (req, res) => {
+    let data = req.body;
+    console.log("Tôi đang lấy dữ liệu từ form tạo user")
+    console.log(data)
+    let message = await CRUDuser.createNewUser(req.body)
+    return res.redirect("/admin/userAdmin");
 }
 
 let getCreateForm = async (req,res) => {
     return res.render('Admin/CreateCate.ejs')
+}
+
+let getCreateUserForm = async (req, res) => {
+    return res.render('Admin/CreateUser.ejs')
 }
 
 let getEditCate = async (req, res) => {
@@ -112,6 +123,19 @@ let getEditCate = async (req, res) => {
     }
 }
 
+let getEditUser = async (req, res) => {
+    let UserID = req.query.id;
+    console.log(UserID)
+    if (UserID) {
+        let UsertData = await CRUDuser.getUserbyID(UserID);
+        return res.render('Admin/editUser.ejs', {
+            User: UsertData // gán dữ liệu của ProoductData vào trong biến product để truyền ra view
+        })
+    } else {
+        return res.send('From edit page')
+    }
+}
+
 let getCRUDCategory = async(req, res) =>{
     let dataCate = await CRUDCategory.getAllCategory()
     console.log("========================")
@@ -121,6 +145,16 @@ let getCRUDCategory = async(req, res) =>{
         dataTable: dataCate
     })
 }
+
+let getCRUDuser = async(req, res) =>{
+    let dataUser = await CRUDuser.getAllUser()
+    console.log("========================")
+    console.log("Chúng tôi đang lấy dữ liệu user từ getCRUDuser", dataUser)
+
+    return res.render('Admin/user.ejs', {
+        dataTable: dataUser
+    })
+} 
 
 let getEditCRUD = async (req, res) => {
     let ProductID = req.query.id;
@@ -181,6 +215,15 @@ let getEditCategory = async (req, res) => {
     })
 }
 
+let getEditUserdone = async (req, res) => {
+    let data = req.body // lấy tất cả input 
+    console.log(data,"đây là gì")
+    let allUser = await CRUDuser.updateUser(data)
+    return res.render('Admin/user.ejs', {
+        dataTable: allUser
+    })
+}
+
 let deleteCRUD = async (req, res) => {
     let ProductID = req.query.id;
     if (ProductID) {
@@ -201,6 +244,19 @@ let deleteCRUDCategory = async (req, res) => {
         })
     } else {
         return res.send("Không tìm thấy Product")
+    }
+}
+
+let deleteCRUDuser = async (req, res) => {
+    let userID = req.query.id;
+    if (userID) {
+        await CRUDuser.deleteUserbyId(userID)
+        let dataUser = await CRUDuser.getAllUser()
+        return res.render('Admin/user.ejs', {
+            dataTable: dataUser
+        })
+    } else {
+        return res.send("Không tìm thấy User")
     }
 }
 
@@ -294,10 +350,19 @@ module.exports = {
     getDetailProduct: getDetailProduct,
     getProductByCategory: getProductByCategory,
     getAdminPage: getAdminPage,
+    ///////////////
     getCRUDCategory:getCRUDCategory,
     getCreateForm:getCreateForm,
     postNewCategory:postNewCategory,
     getEditCate:getEditCate,
     getEditCategory:getEditCategory,
-    deleteCRUDCategory:deleteCRUDCategory
+    deleteCRUDCategory:deleteCRUDCategory,
+    // Admin user
+    getCRUDuser:getCRUDuser,
+    getCreateUserForm:getCreateUserForm,
+    postNewUser:postNewUser,
+    getEditUser:getEditUser,
+    getEditUserdone:getEditUserdone,
+    deleteCRUDuser:deleteCRUDuser
+
 }

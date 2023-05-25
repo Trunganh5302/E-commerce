@@ -106,6 +106,13 @@ let initWebRoutes = (app) => {
   router.post('/put-crud-category-edit',homeControler.getEditCategory) // trang chỉnh sửa danh mục
   router.get('/delete-crudCate', homeControler.deleteCRUDCategory)
 
+  //Admin user
+  router.get('/admin/userAdmin', homeControler.getCRUDuser)
+  router.get('/admin/userAdmin/createUser', homeControler.getCreateUserForm)
+  router.post('/put-crud-user', homeControler.postNewUser)
+  router.get('/edit-crudUser', homeControler.getEditUser)
+  router.post('/put-crud-user-edit',homeControler.getEditUserdone)
+  router.get('/delete-crudUser', homeControler.deleteCRUDuser)
 
 
     // api

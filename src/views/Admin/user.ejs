@@ -237,6 +237,15 @@
     .action-button:hover {
         background-color: #407d99;
     }
+
+    td {
+        max-width: 150px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding: 5px;
+    }
+
 </style>
 
 <body>
@@ -264,9 +273,9 @@
         <!-- Sidebar -->
         <div class="sidebar">
             <ul>
-                <li><a href="/" class="sidebar-link active" data-target="overview">Tổng quan </a></li>
-                <li><a href="/admin/cateAdmin" class="sidebar-link" data-target="category">Quản lí danh mục </a></li>
-                <li><a href="/admin/userAdmin" class="sidebar-link" data-target="account">Quản lí tài khoản</a></li>
+                <li><a href="/admin" class="sidebar-link " data-target="overview">Tổng quan </a></li>
+                <li><a href="/admin/cateAdmin" class="sidebar-link " data-target="category">Quản lí danh mục </a></li>
+                <li><a href="/admin/userAdmin" class="sidebar-link active" data-target="account">Quản lí tài khoản</a></li>
                 <li><a href="" class="sidebar-link" data-target="product">Quản lí sản phẩm</a></li>
                 <li><a href="" class="sidebar-link" data-target="cart">Đơn hàng</a></li>
             </ul>
@@ -274,59 +283,66 @@
 
         <!-- Nội dung -->
         <div class="content">
-            <div id="overview" class="content-item">
+            <div id="overview" class="content-item" style="display: none;">
                 <h2>Trang tổng quan</h2>
-                <div class="wrapper_TQ">
-                    <div id="overview-products">
-                        <h3>Sản phẩm</h3>
-                    </div>
-                    <div id="overview-categories">
-                        <h3>Danh mục</h3>
-                    </div>
-                    <div id="overview-orders">
-                        <h3>Đơn hàng</h3>
-                    </div>
-                    <div id="overview-users">
-                        <h3>Người dùng</h3>
-                    </div>
-                </div>
             </div>
             <div id="category" class="content-item" style="display: none;">
                 <h2>Quản lí danh mục sản phẩm</h2>
-                <button type="button" class="btn btn-primary" style="margin-bottom: 20px;">Thêm danh mục</button>
+            </div>
+            <div id="account" class="content-item" >
+                <h2>Quản lí tài khoản</h2>
+                <a href="/admin/userAdmin/createUser" type="button" class="btn btn-primary" style="margin-bottom: 20px;">Thêm tài khoản</a>
                 <table class="custom-table">
                     <thead>
                         <tr>
-                            <th>STT</th>
-                            <th>Tên danh mục</th>
-                            <th>Mô tả</th>
-                            <th>Thời gian tạo</th>
+                            <th>ID user</th>
+                            <th>UseName</th>
+                            <th>Mật khẩu</th>
+                            <th>FirtName</th>
+                            <th>LastName</th>
+                            <th>Phone</th>
+                            <th>Ngày lập</th>
                             <th>Ngày cập nhật</th>
                             <th>Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Danh mục 1</td>
-                            <td>Mô tả danh mục 1</td>
-                            <td>2023-05-24 09:00:00</td>
-                            <td>2023-05-24</td>
-                            <td>
-                                <button class="action-button">Xóa</button>
-                                <button class="action-button">Sửa</button>
-                            </td>
-                        </tr>
-                        <!-- Các dòng dữ liệu khác -->
+                        <% for(let i=0; i < dataTable.length; i++) { %>
+                            <tr>
+                                <td>
+                                    <%= dataTable[i].id %>
+                                </td>
+                                <td>
+                                    <%= dataTable[i].UseName %>
+                                </td>
+                                <td>
+                                    <%= dataTable[i].passWord %>
+                                </td>
+                                <td>
+                                    <%= dataTable[i].FirtName %>
+                                </td>
+                                <td>
+                                    <%= dataTable[i].LastName %>
+                                </td>
+                                <td>
+                                    <%= dataTable[i].Phone %>
+                                </td>
+                                <td>
+                                    <%= dataTable[i].createdAt %>
+                                </td>
+                                <td>
+                                    <%= dataTable[i].updatedAt %>
+                                </td>
+                                <td>
+                                    <a href="/edit-crudUser?id=<%= dataTable[i].id %>" class="action-button">Sửa</a>
+                                    <a href="/delete-crudUser?id=<%= dataTable[i].id %>" class="action-button">Xóa</a>
+                                </td>
+                            </tr>
+                            <% } %>
+                                <!-- Các dòng dữ liệu khác -->
                     </tbody>
-                    <p>Có 1 danh mục được tìm thấy</p>
+                    <p>Có <%= dataTable.length%> tài khoản được tìm thấy</p>
                 </table>
-
-
-            </div>
-            <div id="account" class="content-item" style="display: none;">
-                <h2>Quản lí tài khoản</h2>
-                <p>Nội dung quản lí tài khoản</p>
             </div>
             <div id="product" class="content-item" style="display: none;">
                 <h2>Quản lí sản phẩm</h2>
@@ -354,6 +370,8 @@
             // Thêm lớp 'active' vào liên kết được click
             link.classList.add('active');
 
+            // Lấy dataset 'target' để xác định nội dung tương ứng
+            
         });
     });
 

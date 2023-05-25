@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container" style="width: 501px;
+    background: beige;
+    padding: 31px;
+    margin-top: 6%;">
+        <h1>Chỉnh sửa tài khoản</h1>
+        <div class="row-6">
+            <form action="/put-crud-user-edit" method="POST">
+                <div class="form-row">
+                    <div class="form-group col-md-6" style="padding-left: 0px;padding-right: 15px;">
+                        <label for="inputEmail4">UseName</label>
+                        <input 
+                        type="text" 
+                        class="form-control" 
+                        id="UseName" 
+                        name="UseName" 
+                        placeholder="Nhập UseName"
+                        value="<%=User.UseName %>"
+                        > 
+                        <!-- bắt buộc phải có name mới lấy được giá trị -->
+                    </div>
+                    <div class="form-group col-md-6" style="padding-left: 15px;padding-right: 0px;" >
+                        <label for="inputPassword4">Mật khẩu</label>
+                        <input 
+                        type="text" 
+                        class="form-control" 
+                        id="passWord" 
+                        name="passWord" 
+                        placeholder="Nhập mật khẩu" 
+                        value="<%=User.passWord %>"
+                        >
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6" style="padding-left: 0px;padding-right: 15px;">
+                        <label for="inputEmail4">FirtName</label>
+                        <input 
+                        type="text" 
+                        class="form-control" 
+                        id="FirtName" 
+                        name="FirtName" 
+                        placeholder="Nhập FirtName"
+                        value="<%=User.FirtName %>"
+                        > 
+                        <!-- bắt buộc phải có name mới lấy được giá trị -->
+                    </div>
+                    <div class="form-group col-md-6" style="padding-left: 15px;padding-right: 0px;" >
+                        <label for="inputPassword4">LastName</label>
+                        <input 
+                        type="text" 
+                        class="form-control" 
+                        id="LastName" 
+                        name="LastName" 
+                        placeholder="Nhập LastName"
+                        value="<%=User.LastName %>"
+                        >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputAddress">Số điện thoạt</label>
+                    <input 
+                    type="text" 
+                    class="form-control" 
+                    id="Phone" name="Phone" 
+                    placeholder="Nhập số điện thoạt"
+                    value="<%=User.Phone %>"
+                    >
+                </div>
+                <input type="text" name="id" value="<%=User.id %>" hidden>
+                
+                <button type="submit" class="btn btn-primary" style="margin-top: 20px;">Cập nhật tài khoản</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>
