@@ -98,6 +98,7 @@ let initWebRoutes = (app) => {
   router.get('/edit-crud', homeControler.getEditCRUD)
   router.post('/put-crud', homeControler.putCRUD)
   router.get('/delete-crud', homeControler.deleteCRUD)
+  router.get('/admin/cateAdmin', homeControler.getCRUDCategory)
     -
 
     // api

@@ -75,7 +75,7 @@ let postCRUD = async (req, res) => {
     return res.send("trung anh đã post")
 }
 
-let getCRUD = async (req, res) => {
+let getCRUD = async (req, res) => { // test thử get ra hết tất cả các sản phẩm
     let data = await CRUDProduct.getAllProduct()
     console.log("----------------")
     console.log(data)
@@ -83,6 +83,16 @@ let getCRUD = async (req, res) => {
 
     return res.render('test/DisplayCRUD.ejs', {
         dataTable: data
+    })
+}
+
+let getCRUDCategory = async(req, res) =>{
+    let dataCate = await CRUDCategory.getAllCategory()
+    console.log("========================")
+    console.log("Chúng tôi đang lấy dữ liệu category từ getCRUDCategory", dataCate)
+
+    return res.render('Admin/cate.ejs', {
+        dataTable: dataCate
     })
 }
 
@@ -171,6 +181,7 @@ let getCategory = async (req, res, callback) => {
         userLoggedIn = true;
         username = req.session.username;
         console.log('Chúng tôi đứng từ homeControler', username, req.session.userId)
+
     }
 
     // Gọi callback function và truyền dữ liệu cần truyền vào
@@ -236,5 +247,6 @@ module.exports = {
     getShop: getShop,
     getDetailProduct: getDetailProduct,
     getProductByCategory: getProductByCategory,
-    getAdminPage: getAdminPage
+    getAdminPage: getAdminPage,
+    getCRUDCategory:getCRUDCategory
 }
