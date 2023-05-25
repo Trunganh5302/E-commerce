@@ -14,6 +14,20 @@ let getAllCart = (userID) => {
       }
     });
   };
+
+  let getAllCart2 = () => {
+    return new Promise(async(resolve, reject) => {
+      try{
+          let cart = db.Bills.findAll({
+            raw:true
+          });
+          console.log(cart)
+          resolve(cart); // thoát khỏi 1 promise
+      }catch(e){
+          reject(e)
+      }
+  })
+  };
   
 
 let DelAllCart = () => {
@@ -89,5 +103,6 @@ module.exports = {
     createNewCart: createNewCart,
     deleteCartbyId: deleteCartbyId,
     createNewBill: createNewBill,
-    DelAllCart:DelAllCart
+    DelAllCart:DelAllCart,
+    getAllCart2:getAllCart2
 }

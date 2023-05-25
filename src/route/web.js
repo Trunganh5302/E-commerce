@@ -114,6 +114,16 @@ let initWebRoutes = (app) => {
   router.post('/put-crud-user-edit',homeControler.getEditUserdone)
   router.get('/delete-crudUser', homeControler.deleteCRUDuser)
 
+  /// Admin product
+  router.get('/admin/productAdmin', homeControler.getCRUDproduct)
+  router.get('/admin/cateAdmin/createProduct', homeControler.getCreateProductForm)
+  router.post('/put-crud-product', homeControler.postNewProduct)
+  router.get('/edit-crudProduct', homeControler.getEditProduct) // chuyển sang editpage
+  router.post('/put-crud-product-edit',homeControler.getEditProductdone)
+  router.get('/delete-crudProduct', homeControler.deleteCRUDProduct)
+
+  router.get('/admin/billAdmin', homeControler.getCRUDbill)
+
 
     // api
   router.get('/login', userControler.handleLogin)

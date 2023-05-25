@@ -5,12 +5,13 @@ import { raw } from 'body-parser'
 let createNewProduct = (data) => {
     return new Promise(async(resolve, reject) =>{
         try {
-            await db.Product.create({
-                name: data.name,
+            await db.Products.create({
+                nameProduct: data.nameProduct,
+                Desc:data.Desc,
                 imageSrc: data.imageSrc,
-                imageAlt: data.imageAlt,
                 price: data.price,
-                color: data.color === 'Đen' ? true : false
+                nameCategory: data.nameCategory,
+                inventorID: data.inventorID 
             })
 
             resolve("Oke create a new product");
@@ -75,6 +76,20 @@ let getProductByCategory = (categoryID) => {
     });
   };
 
+  let getNameCategories = () => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let categories = await db.Categorys.findAll({
+          attributes: ['nameCategory']
+        });
+        const nameCategories = categories.map(category => category.nameCategory);
+        resolve(nameCategories);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  };
+
 let getNameCate = (categoryID) => {
     return new Promise(async (resolve, reject) =>{
         try {
@@ -103,17 +118,19 @@ let updateProduct = (data) =>{
                 where: {id: data.id} // tìm Product trong db với điều kiệm id truyền vào
             })
             if (product) {
-                product.name = data.name
+
+                product.nameProduct = data.nameProduct
+                product.Desc = data.imageSrc
                 product.imageSrc = data.imageSrc
-                product.imageAlt = data.imageAlt
                 product.price = data.price
-                product.color = data.color
+                product.nameCategory = data.nameCategory
+                product.inventorID = data.inventorID
 
                 console.log(data.id)
 
                 await product.save()
 
-                let allProduct = await db.Product.findAll()
+                let allProduct = await db.Products.findAll()
                 resolve(allProduct)
             }else{
                 resolve()
@@ -127,7 +144,7 @@ let updateProduct = (data) =>{
 let deleteProductbyId = (Productid) => {
     return new Promise(async(resolve, reject) => {
         try {
-            let product = await db.Product.findOne({
+            let product = await db.Products.findOne({
                 where: {id: Productid}
             })
 
@@ -149,5 +166,6 @@ module.exports = {
     updateProduct: updateProduct,
     deleteProductbyId: deleteProductbyId,
     getProductByCategory:getProductByCategory,
-    getNameCate:getNameCate
+    getNameCate:getNameCate,
+    getNameCategories:getNameCategories //lấy name category truyền vào combobox
 }

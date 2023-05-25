@@ -237,6 +237,15 @@
     .action-button:hover {
         background-color: #407d99;
     }
+
+    td {
+        max-width: 150px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding: 5px;
+    }
+
 </style>
 
 <body>
@@ -264,8 +273,8 @@
         <!-- Sidebar -->
         <div class="sidebar">
             <ul>
-                <li><a href="/" class="sidebar-link active" data-target="overview">Tổng quan </a></li>
-                <li><a href="/admin/cateAdmin" class="sidebar-link" data-target="category">Quản lí danh mục </a></li>
+                <li><a href="/admin" class="sidebar-link " data-target="overview">Tổng quan </a></li>
+                <li><a href="/admin/cateAdmin" class="sidebar-link active" data-target="category">Quản lí danh mục </a></li>
                 <li><a href="/admin/userAdmin" class="sidebar-link" data-target="account">Quản lí tài khoản</a></li>
                 <li><a href="/admin/productAdmin" class="sidebar-link" data-target="product">Quản lí sản phẩm</a></li>
                 <li><a href="/admin/billAdmin" class="sidebar-link" data-target="cart">Đơn hàng</a></li>
@@ -274,54 +283,11 @@
 
         <!-- Nội dung -->
         <div class="content">
-            <div id="overview" class="content-item">
+            <div id="overview" class="content-item" style="display: none;">
                 <h2>Trang tổng quan</h2>
-                <div class="wrapper_TQ">
-                    <div id="overview-products">
-                        <h3>Sản phẩm</h3>
-                    </div>
-                    <div id="overview-categories">
-                        <h3>Danh mục</h3>
-                    </div>
-                    <div id="overview-orders">
-                        <h3>Đơn hàng</h3>
-                    </div>
-                    <div id="overview-users">
-                        <h3>Người dùng</h3>
-                    </div>
-                </div>
             </div>
             <div id="category" class="content-item" style="display: none;">
                 <h2>Quản lí danh mục sản phẩm</h2>
-                <button type="button" class="btn btn-primary" style="margin-bottom: 20px;">Thêm danh mục</button>
-                <table class="custom-table">
-                    <thead>
-                        <tr>
-                            <th>STT</th>
-                            <th>Tên danh mục</th>
-                            <th>Mô tả</th>
-                            <th>Thời gian tạo</th>
-                            <th>Ngày cập nhật</th>
-                            <th>Hành động</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Danh mục 1</td>
-                            <td>Mô tả danh mục 1</td>
-                            <td>2023-05-24 09:00:00</td>
-                            <td>2023-05-24</td>
-                            <td>
-                                <button class="action-button">Xóa</button>
-                                <button class="action-button">Sửa</button>
-                            </td>
-                        </tr>
-                        <!-- Các dòng dữ liệu khác -->
-                    </tbody>
-                    <p>Có 1 danh mục được tìm thấy</p>
-                </table>
-
 
             </div>
             <div id="account" class="content-item" style="display: none;">
@@ -332,9 +298,48 @@
                 <h2>Quản lí sản phẩm</h2>
                 <p>Nội dung quản lí sản phẩm</p>
             </div>
-            <div id="cart" class="content-item" style="display: none;">
+            <div id="cart" class="content-item" >
                 <h2>Quản lí đơn hàng</h2>
-                <p>Nội dung quản lí đơn hàng</p>
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>Mã hóa đơn</th>
+                            <th>UserID</th>
+                            <th>Số lượng sản phẩm</th>
+                            <th>Tổng tiền</th>
+                            <th>Thời gian tạo</th>
+                            <th>Ngày cập nhật</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for(let i=0; i < dataTable.length; i++) { %>
+                            <tr>
+                                <td>
+                                    <%= dataTable[i].id %>
+                                </td>
+                                <td>
+                                    <%= dataTable[i].UserID %>
+                                </td>
+                                <td>
+                                    <%= dataTable[i].Quantity %>
+                                </td>
+                                <td>
+                                    <%= dataTable[i].Total %>
+                                </td>
+                                <td>
+                                    <%= dataTable[i].createdAt %>
+                                </td>
+                                <td>
+                                    <%= dataTable[i].updatedAt %>
+                                </td>
+                            </tr>
+                            <% } %>
+                                <!-- Các dòng dữ liệu khác -->
+                    </tbody>
+                    <p>Có <%= dataTable.length%> đơn hàng được tìm thấy</p>
+                </table>
+
+
             </div>
             <!-- Các phần nội dung khác -->
         </div>
@@ -354,6 +359,8 @@
             // Thêm lớp 'active' vào liên kết được click
             link.classList.add('active');
 
+            // Lấy dataset 'target' để xác định nội dung tương ứng
+            
         });
     });
 

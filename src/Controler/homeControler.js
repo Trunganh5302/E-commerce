@@ -102,6 +102,14 @@ let postNewUser = async (req, res) => {
     return res.redirect("/admin/userAdmin");
 }
 
+let postNewProduct = async (req, res) => {
+    let data = req.body;
+    console.log("Tôi đang lấy dữ liệu từ form tạo user")
+    console.log(data)
+    let message = await CRUDProduct.createNewProduct(req.body)
+    return res.redirect("/admin/productAdmin");
+}
+
 let getCreateForm = async (req,res) => {
     return res.render('Admin/CreateCate.ejs')
 }
@@ -109,6 +117,19 @@ let getCreateForm = async (req,res) => {
 let getCreateUserForm = async (req, res) => {
     return res.render('Admin/CreateUser.ejs')
 }
+
+let getCreateProductForm = async (req, res) => {
+    try {
+      let nameCategories = await CRUDProduct.getNameCategories();
+      console.log("Tôi lấy nameCategories: ", nameCategories);
+      return res.render('Admin/CreateProduct.ejs', {
+        nameCategories: nameCategories
+      });
+    } catch (error) {
+      console.error(error);
+      // Xử lý lỗi
+    }
+  };
 
 let getEditCate = async (req, res) => {
     let categoryID = req.query.id;
@@ -153,6 +174,26 @@ let getCRUDuser = async(req, res) =>{
 
     return res.render('Admin/user.ejs', {
         dataTable: dataUser
+    })
+} 
+
+let getCRUDproduct = async(req, res) =>{
+    let dataProduct = await CRUDProduct.getAllProduct()
+    console.log("========================")
+    console.log("Chúng tôi đang lấy dữ liệu user từ getCRUDproduct", dataProduct)
+
+    return res.render('Admin/product.ejs', {
+        dataTable: dataProduct
+    })
+} 
+
+let getCRUDbill = async(req, res) =>{
+    let dataBill = await CRUDBill.getAllCart2()
+    console.log("========================")
+    console.log("Chúng tôi đang lấy dữ liệu user từ getCRUDbill", dataBill)
+
+    return res.render('Admin/bill.ejs', {
+        dataTable: dataBill
     })
 } 
 
@@ -224,6 +265,30 @@ let getEditUserdone = async (req, res) => {
     })
 }
 
+let getEditProductdone = async (req, res) => {
+    let data = req.body // lấy tất cả input 
+    console.log(data,"đây là gì")
+    let allProduct = await CRUDProduct.updateProduct(data)
+    return res.render('Admin/product.ejs', {
+        dataTable: allProduct
+    })
+}
+
+let getEditProduct = async (req, res) => {
+    let productID = req.query.id;
+    console.log(productID)
+    if (productID) {
+        let ProductData = await CRUDProduct.getProductbyID(productID);
+        let nameCategories = await CRUDProduct.getNameCategories();
+        return res.render('Admin/editProduct.ejs', {
+            Product: ProductData, // gán dữ liệu của ProoductData vào trong biến product để truyền ra view
+            nameCategories: nameCategories
+        })
+    } else {
+        return res.send('From edit page')
+    }
+}
+
 let deleteCRUD = async (req, res) => {
     let ProductID = req.query.id;
     if (ProductID) {
@@ -254,6 +319,19 @@ let deleteCRUDuser = async (req, res) => {
         let dataUser = await CRUDuser.getAllUser()
         return res.render('Admin/user.ejs', {
             dataTable: dataUser
+        })
+    } else {
+        return res.send("Không tìm thấy User")
+    }
+}
+
+let deleteCRUDProduct = async (req, res) => {
+    let productID = req.query.id;
+    if (productID) {
+        await CRUDProduct.deleteProductbyId(productID)
+        let dataProduct = await CRUDProduct.getAllProduct()
+        return res.render('Admin/product.ejs', {
+            dataTable: dataProduct
         })
     } else {
         return res.send("Không tìm thấy User")
@@ -363,6 +441,15 @@ module.exports = {
     postNewUser:postNewUser,
     getEditUser:getEditUser,
     getEditUserdone:getEditUserdone,
-    deleteCRUDuser:deleteCRUDuser
+    deleteCRUDuser:deleteCRUDuser,
+    /// Admin product
+    getCRUDproduct:getCRUDproduct,
+    getCreateProductForm:getCreateProductForm,
+    postNewProduct:postNewProduct,
+    getEditProduct:getEditProduct,
+    getEditProductdone:getEditProductdone,
+    deleteCRUDProduct:deleteCRUDProduct,
+    //////
 
+    getCRUDbill:getCRUDbill
 }
