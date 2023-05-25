@@ -5,10 +5,10 @@ const userController = {
   handleLogin: (req, res) => {
     const userLoggedIn = req.session.userLoggedIn || false; // Lấy giá trị userLoggedIn từ session, mặc định là false nếu không tồn tại
     const username = req.session.username || ''; // Lấy giá trị username từ session, mặc định là chuỗi rỗng nếu không tồn tại
-  
+
     return res.render('login.ejs', { userLoggedIn, username });
   },
-  
+
 
   handleRegister: async (req, res) => {
     try {
@@ -21,23 +21,23 @@ const userController = {
     }
   },
 
-  putLogin : async (req, res) => {
+  putLogin: async (req, res) => {
     let dataUser = req.body;
     let allUsers = await CRUDuser.getAllUser();
     let matchedUser = null;
     let userLoggedIn = false; // Khai báo biến userLoggedIn
-  
+
     for (let user of allUsers) {
       if (user.UseName === dataUser.UseName && user.passWord === dataUser.passWord) {
         matchedUser = user;
         break;
       }
     }
-  
+
     if (matchedUser) {
       console.log("User tìm thấy:", matchedUser);
       userLoggedIn = true; // Gán giá trị true cho userLoggedIn
-        // Lưu id và userName vào session
+      // Lưu id và userName vào session
       req.session.userId = matchedUser.id;
       req.session.username = matchedUser.UseName;
 
@@ -49,7 +49,27 @@ const userController = {
     }
   },
 
-  logout : (req, res) => {
+  putRegister: async (req, res) => {
+    try {
+      const dataUser = req.body;
+      const existingUser = await CRUDuser.getUserByUsername(dataUser.UseName);
+
+      if (existingUser) {
+        // Người dùng đã tồn tại trong cơ sở dữ liệu
+        res.send('<script>alert("Tên đăng nhập đã tồn tại"); window.location.href="/register";</script>');
+      } else {
+        // Người dùng chưa tồn tại trong cơ sở dữ liệu, tiến hành đăng ký
+        await CRUDuser.createUser(dataUser);
+        res.redirect('/login');
+      }
+    } catch (error) {
+      console.log(error);
+      res.status(500).send('Internal Server Error');
+    }
+  },
+
+
+  logout: (req, res) => {
     req.session.destroy((err) => {
       if (err) {
         console.log(err);
@@ -58,7 +78,7 @@ const userController = {
       }
     });
   }
-  
+
 };
 
 export default userController;

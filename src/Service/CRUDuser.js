@@ -17,8 +17,8 @@ let createUser = (data) => {
     return new Promise(async(resolve, reject) => {
         try {
             await db.Users.create({
-                UseName: data.name,
-                passWord: data.imageSrc,
+                UseName: data.UseName,
+                passWord: data.passWord,
             })
 
             resolve("Oke create a new user");
@@ -28,7 +28,22 @@ let createUser = (data) => {
     })
 }
 
+let getUserByUsername = (username) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const user = await db.Users.findOne({
+                where: { UseName: username }
+            });
+            resolve(user);
+        } catch (error) {
+            reject(error);
+        }
+    });
+};
+
+
 module.exports = {
     getAllUser:getAllUser,
-    createUser:createUser
+    createUser:createUser,
+    getUserByUsername:getUserByUsername
 }

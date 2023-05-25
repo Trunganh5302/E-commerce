@@ -106,7 +106,7 @@ let initWebRoutes = (app) => {
 
 
   router.post('/put-login', userControler.putLogin)
-  // router.post('/put-register', userControler.putRegister)
+  router.post('/put-register', userControler.putRegister)
 
 
   router.get('/', (req, res) => {
