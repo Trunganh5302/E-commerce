@@ -264,7 +264,7 @@
         <!-- Sidebar -->
         <div class="sidebar">
             <ul>
-                <li><a href="/" class="sidebar-link active" data-target="overview">Tổng quan </a></li>
+                <li><a href="/admin" class="sidebar-link active" data-target="overview">Tổng quan </a></li>
                 <li><a href="/admin/cateAdmin" class="sidebar-link" data-target="category">Quản lí danh mục </a></li>
                 <li><a href="/admin/userAdmin" class="sidebar-link" data-target="account">Quản lí tài khoản</a></li>
                 <li><a href="/admin/productAdmin" class="sidebar-link" data-target="product">Quản lí sản phẩm</a></li>
@@ -279,15 +279,19 @@
                 <div class="wrapper_TQ">
                     <div id="overview-products">
                         <h3>Sản phẩm</h3>
+                        <h2><%= dataProduct.length %></h2>
                     </div>
                     <div id="overview-categories">
                         <h3>Danh mục</h3>
+                        <h2><%= dataCategory.length %></h2>
                     </div>
                     <div id="overview-orders">
                         <h3>Đơn hàng</h3>
+                        <h2><%= dataBill.length %></h2>
                     </div>
                     <div id="overview-users">
                         <h3>Người dùng</h3>
+                        <h2><%= dataUser.length %></h2>
                     </div>
                 </div>
             </div>

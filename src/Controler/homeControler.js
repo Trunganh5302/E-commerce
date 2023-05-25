@@ -408,7 +408,16 @@ let getProductByCategory = async (req, res) => {
 };
 
 let getAdminPage = async (req, res) => {
-    return res.render('admin.ejs')
+    let dataProduct = await CRUDProduct.getAllProduct()
+    let dataCategory = await CRUDCategory.getAllCategory()
+    let dataBill = await CRUDBill.getAllCart2()
+    let dataUser = await CRUDuser.getAllUser()
+    return res.render('admin.ejs',{
+        dataProduct:dataProduct,
+        dataCategory:dataCategory,
+        dataBill:dataBill,
+        dataUser:dataUser
+    })
 };
 
 
