@@ -67,6 +67,7 @@ let initWebRoutes = (app) => {
   router.get('/about', homeControler.getAboutPage) // chưa làm
   router.get('/news', homeControler.getAboutPage)  // chưa làm
   router.get('/contacts', homeControler.getAboutPage)  // chưa làm
+  router.get('/admin', homeControler.getAdminPage)
 
   router.get('/detail-product', homeControler.getDetailProduct)
 

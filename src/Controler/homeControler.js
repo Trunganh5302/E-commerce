@@ -48,7 +48,7 @@ let getShop = async (req, res) => {
     let userId = req.session.userId;
     let username = req.session.username;
 
-    if(userId){
+    if (userId) {
         userLoggedIn = true
     }
 
@@ -105,7 +105,7 @@ let getDetailProduct = async (req, res) => {
     let username = req.session.username;
     let ProductID = req.query.id;
 
-    console.log("ID của product là : " , ProductID)
+    console.log("ID của product là : ", ProductID)
 
     if (userId) {
         userLoggedIn = true;
@@ -161,61 +161,65 @@ let getCategory = async (req, res, callback) => {
     let userLoggedIn = false;
     let username = req.query.UseName || "";
     let userId = req.session.userId;
-    console.log(userId,"userID được lấy thừ getCategory")
-  
+    console.log(userId, "userID được lấy thừ getCategory")
+
     let dataCategory = await CRUDCategory.getAllCategory();
     let data = await CRUDProduct.getAllProduct();
-    
-  
+
+
     if (req.session.userId) {
-      userLoggedIn = true;
-      username = req.session.username;
-      console.log('Chúng tôi đứng từ homeControler', username,req.session.userId)
+        userLoggedIn = true;
+        username = req.session.username;
+        console.log('Chúng tôi đứng từ homeControler', username, req.session.userId)
     }
-  
+
     // Gọi callback function và truyền dữ liệu cần truyền vào
     callback(dataCategory, data);
-  }
+}
 
-  let getProductByCategory = async (req, res) => {
+let getProductByCategory = async (req, res) => {
     let userLoggedIn = req.session.userLoggedIn;
     let userId = req.session.userId;
     let username = req.session.username;
     let categoryID = req.query.categorytID; // Sử dụng tên key chính xác từ query parameters
-  
+
     console.log("category tôi đang kiểm tra", categoryID);
-  
+
     if (userId) {
-      userLoggedIn = true;
+        userLoggedIn = true;
     }
-  
+
     console.log(userLoggedIn, userId, username);
-  
+
     if (categoryID) {
-      try {
-        let ProductData = await CRUDProduct.getProductByCategory(categoryID);
-        let NameCate = await CRUDProduct.getNameCate(categoryID)
-        let dataCategory = await CRUDCategory.getAllCategory()
+        try {
+            let ProductData = await CRUDProduct.getProductByCategory(categoryID);
+            let NameCate = await CRUDProduct.getNameCate(categoryID)
+            let dataCategory = await CRUDCategory.getAllCategory()
 
-        console.log(NameCate , "Đây là tên mà chúng tôi muốn========================================")
+            console.log(NameCate, "Đây là tên mà chúng tôi muốn========================================")
 
-        console.log(req.session); // In toàn bộ dữ liệu trong session
-        console.log("chúng tôi đang xem dữ liệu trong sesion khi chuyển hướng tới detailProduct");
-        return res.render('productWcategory.ejs', {
-          DataCate: NameCate,
-          dataTable: ProductData,
-          userLoggedIn,
-          username,
-          dataCategory:dataCategory
-        });
-      } catch (error) {
-        return res.send('Error: ' + error.message);
-      }
+            console.log(req.session); // In toàn bộ dữ liệu trong session
+            console.log("chúng tôi đang xem dữ liệu trong sesion khi chuyển hướng tới detailProduct");
+            return res.render('productWcategory.ejs', {
+                DataCate: NameCate,
+                dataTable: ProductData,
+                userLoggedIn,
+                username,
+                dataCategory: dataCategory
+            });
+        } catch (error) {
+            return res.send('Error: ' + error.message);
+        }
     } else {
-      return res.send('From edit page');
+        return res.send('From edit page');
     }
-  };
-  
+};
+
+let getAdminPage = async (req, res) => {
+    return res.render('admin.ejs')
+};
+
 
 
 module.exports = {
@@ -231,5 +235,6 @@ module.exports = {
     getCategory: getCategory,
     getShop: getShop,
     getDetailProduct: getDetailProduct,
-    getProductByCategory: getProductByCategory
+    getProductByCategory: getProductByCategory,
+    getAdminPage: getAdminPage
 }

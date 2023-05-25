@@ -19,6 +19,7 @@ let createUser = (data) => {
             await db.Users.create({
                 UseName: data.UseName,
                 passWord: data.passWord,
+                Role: 0
             })
 
             resolve("Oke create a new user");

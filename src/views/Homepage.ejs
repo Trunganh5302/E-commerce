@@ -520,26 +520,28 @@
                         <a class="nav-link" href="/about">About</a>
                     </li>
                 </ul>
-                <div style="display: flex;">
-                    <% if (userLoggedIn) { %>
-                        <!-- Kiểm tra userLoggedIn bằng true -->
-                        <a href="/cart-product2" class="cart-icon">&#128722;<span class="item-count"></span></a>
 
-                        <div class="username">
-                            Xin chào <%= username %>.
-                        </div>
-                        <div class="actions">
-                            <a href="/logout" class="text-sm font-semibold leading-6 text-gray-900">Đăng xuất</a>
-                            <!-- Thêm mã HTML và CSS cho biểu tượng giỏ hàng -->
-                        </div>
-                </div>
+                <div class="dropdown">
+                    <% if (userLoggedIn) { %>
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <%= username %>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2" style="right: 0; left: auto;">
+                        <% if (username === 'Chubinbmt02') { %>
+                            <a href="/admin" class="dropdown-item" type="button">Trang quản lí</a>
+                        <% } %>
+
+                      <a class="dropdown-item" type="button">Profile</a>
+                      <a href="/logout" class="dropdown-item" type="button">Đăng xuất</a>
+                    </div>
+                  </div>
                 <% } else { %>
                     <div>
                         <a href="/login" class="text-sm font-semibold leading-6 text-gray-900">
                             Đăng nhập <span aria-hidden="true">&rarr;</span>
                         </a>
                     </div>
-                    <% } %>
+                <% } %>
             </div>
 
 
