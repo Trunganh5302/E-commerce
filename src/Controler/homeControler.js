@@ -86,6 +86,32 @@ let getCRUD = async (req, res) => { // test thử get ra hết tất cả các s
     })
 }
 
+let postNewCategory = async (req, res) => {
+    let data = req.body;
+    console.log("Tôi đang lấy dữ liệu từ form tạo mới danh mục")
+    console.log(data)
+    let message = await CRUDCategory.createNewCategory(req.body)
+    console.log(message)
+    return res.redirect("/admin/cateAdmin");
+}
+
+let getCreateForm = async (req,res) => {
+    return res.render('Admin/CreateCate.ejs')
+}
+
+let getEditCate = async (req, res) => {
+    let categoryID = req.query.id;
+    console.log(categoryID)
+    if (categoryID) {
+        let CategorytData = await CRUDCategory.getCategorybyID(categoryID);
+        return res.render('Admin/editCategory.ejs', {
+            Category: CategorytData // gán dữ liệu của ProoductData vào trong biến product để truyền ra view
+        })
+    } else {
+        return res.send('From edit page')
+    }
+}
+
 let getCRUDCategory = async(req, res) =>{
     let dataCate = await CRUDCategory.getAllCategory()
     console.log("========================")
@@ -146,6 +172,15 @@ let putCRUD = async (req, res) => {
     })
 }
 
+let getEditCategory = async (req, res) => {
+    let data = req.body // lấy tất cả input 
+    console.log(data,"đây là gì")
+    let allCategory = await CRUDCategory.updateCategory(data)
+    return res.render('Admin/cate.ejs', {
+        dataTable: allCategory
+    })
+}
+
 let deleteCRUD = async (req, res) => {
     let ProductID = req.query.id;
     if (ProductID) {
@@ -154,8 +189,19 @@ let deleteCRUD = async (req, res) => {
     } else {
         return res.send("Không tìm thấy Product")
     }
+}
 
-
+let deleteCRUDCategory = async (req, res) => {
+    let categoryID = req.query.id;
+    if (categoryID) {
+        await CRUDCategory.deleteCategorybyId(categoryID)
+        let dataCate = await CRUDCategory.getAllCategory()
+        return res.render('Admin/cate.ejs', {
+            dataTable: dataCate
+        })
+    } else {
+        return res.send("Không tìm thấy Product")
+    }
 }
 
 let getProduct = async (req, res) => {
@@ -248,5 +294,10 @@ module.exports = {
     getDetailProduct: getDetailProduct,
     getProductByCategory: getProductByCategory,
     getAdminPage: getAdminPage,
-    getCRUDCategory:getCRUDCategory
+    getCRUDCategory:getCRUDCategory,
+    getCreateForm:getCreateForm,
+    postNewCategory:postNewCategory,
+    getEditCate:getEditCate,
+    getEditCategory:getEditCategory,
+    deleteCRUDCategory:deleteCRUDCategory
 }

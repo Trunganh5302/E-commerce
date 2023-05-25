@@ -98,8 +98,15 @@ let initWebRoutes = (app) => {
   router.get('/edit-crud', homeControler.getEditCRUD)
   router.post('/put-crud', homeControler.putCRUD)
   router.get('/delete-crud', homeControler.deleteCRUD)
-  router.get('/admin/cateAdmin', homeControler.getCRUDCategory)
-    -
+  ///Admin
+  router.get('/admin/cateAdmin', homeControler.getCRUDCategory) // Hiển thị trang quản lí danh mục
+  router.get('/admin/cateAdmin/createCate', homeControler.getCreateForm) // Trang tạo mới danh mục
+  router.post('/put-crud-category', homeControler.postNewCategory)// hiển thị form thêm danh mục
+  router.get('/edit-crudCate', homeControler.getEditCate) // Trỏ tới trang chỉnh sửa danh mục
+  router.post('/put-crud-category-edit',homeControler.getEditCategory) // trang chỉnh sửa danh mục
+  router.get('/delete-crudCate', homeControler.deleteCRUDCategory)
+
+
 
     // api
   router.get('/login', userControler.handleLogin)

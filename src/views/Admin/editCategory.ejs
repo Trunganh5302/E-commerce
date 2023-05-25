@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Chỉnh sửa danh mục</h1>
+        <div class="row-6">
+            <form action="/put-crud-category-edit" method="POST">
+                <div class="form-row">
+                    <div class="form-group col-md-6" style="padding-left: 0px;padding-right: 15px;">
+                        <label for="inputEmail4">Name</label>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            id="nameCategory" 
+                            name="nameCategory" 
+                            placeholder="Nhập tên"
+                            value="<%=Category.nameCategory %>"
+                        > 
+                        <!-- bắt buộc phải có name mới lấy được giá trị -->
+                    </div>
+                    <div class="form-group col-md-6" style="padding-left: 15px;padding-right: 0px;" >
+                        <label for="inputPassword4">Đường dẫn Image</label>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            id="imageSrc" 
+                            name="imageSrc" 
+                            placeholder="Nhập đường dẫn" 
+                            value="<%=Category.imageSrc %>"
+                        >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputAddress">Mô tả Image</label>
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        id="Desc" 
+                        name="Desc" 
+                        placeholder="Nhập mô tả"
+                        value="<%=Category.Desc %>"
+                    >
+                </div>
+                
+                <input type="text" name="id" value="<%=Category.id %>" hidden>
+                
+                <button type="submit" class="btn btn-primary">Cập nhật</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

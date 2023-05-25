@@ -288,11 +288,11 @@
             </div>
             <div id="category" class="content-item">
                 <h2>Quản lí danh mục sản phẩm</h2>
-                <button type="button" class="btn btn-primary" style="margin-bottom: 20px;">Thêm danh mục</button>
+                <a href="/admin/cateAdmin/createCate" type="button" class="btn btn-primary" style="margin-bottom: 20px;">Thêm danh mục</a>
                 <table class="custom-table">
                     <thead>
                         <tr>
-                            <th>STT</th>
+                            <th>Mã danh mục</th>
                             <th>Tên danh mục</th>
                             <th>Mô tả</th>
                             <th>Thời gian tạo</th>
@@ -319,8 +319,8 @@
                                     <%= dataTable[i].updatedAt %>
                                 </td>
                                 <td>
-                                    <button class="action-button">Xóa</button>
-                                    <button class="action-button">Sửa</button>
+                                    <a href="/edit-crudCate?id=<%= dataTable[i].id %>" class="action-button">Sửa</a>
+                                    <a href="/delete-crudCate?id=<%= dataTable[i].id %>" class="action-button">Xóa</a>
                                 </td>
                             </tr>
                             <% } %>
